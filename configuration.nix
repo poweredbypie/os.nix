@@ -67,6 +67,7 @@
     usbutils
   ];
 
+  # Include the appropriate WiFi driver
   boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
 
   # Get rid of Perl (ew)
@@ -87,6 +88,10 @@
     ];
   };
 
+  # Enable new CLI interface and flakes
+  nix.settings.experimental-features = "nix-command flakes"
+
+  # Replace sudo with doas (FreeBSD moment)
   security.sudo.enable = false;
   security.doas = {
     enable = true;
