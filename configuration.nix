@@ -55,7 +55,7 @@
     createHome = true;
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [firefox gitMinimal];
+    packages = with pkgs; [firefox];
   };
 
   # List packages installed in system profile. To search, run:
@@ -65,6 +65,8 @@
     elvish
     wget
     usbutils
+    # This is required for nixos-rebuild with flakes.
+    gitMinimal
   ];
 
   # Include the appropriate WiFi driver
