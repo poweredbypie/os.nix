@@ -15,12 +15,10 @@
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager {
-          # I think this allows home manager to pull from nixpkgs without the namespace?
-          # Maybe?
           home-manager = {
             useGlobalPkgs = true;
-            users.pie = import ./common/user
-          }; 
+            users.pie = import ./common/user/home.nix;
+          };
         }
       ];
     };
