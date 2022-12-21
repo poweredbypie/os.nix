@@ -55,7 +55,7 @@
     createHome = true;
     isNormalUser = true;
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [firefox];
+    packages = with pkgs; [firefox gitMinimal];
   };
 
   # List packages installed in system profile. To search, run:
