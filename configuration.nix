@@ -89,7 +89,7 @@
   };
 
   # Enable new CLI interface and flakes
-  nix.settings.experimental-features = "nix-command flakes"
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Replace sudo with doas (FreeBSD moment)
   security.sudo.enable = false;
