@@ -68,6 +68,11 @@
   ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
+
+  # Get rid of Perl (ew)
+  environment.defaultPackages = [];
+  # Replace nano with kak
+  environment.variables.EDITOR = "kak";
   
   # Enable Sway!
   programs.sway = {
