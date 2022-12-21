@@ -12,7 +12,17 @@
   outputs = { self, nixpkgs, home-manager }: {
     nixosConfigurations.v4 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [./configuration.nix];
+      modules = [
+        ./configuration.nix
+        home-manager.nixosModules.home-manager {
+          # I think this allows home manager to pull from nixpkgs without the namespace?
+          # Maybe?
+          home-manager = {
+            useGlobalPkgs = true;
+            users.pie = import ./common/user
+          }; 
+        }
+      ];
     };
   };
 }

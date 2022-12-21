@@ -8,28 +8,13 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./common
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "v4"; # Define your hostname.
-  networking.wireless.iwd = {
-    enable = true;
-    settings = {
-      General.EnableNetworkConfiguration = true;
-      Network.EnableIPv6 = true;
-      Settings.AutoConnect = true;
-    };
-  };
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -37,11 +22,6 @@
   # };
 
   # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -50,32 +30,8 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.pie = {
-    createHome = true;
-    isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [firefox];
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    kakoune
-    elvish
-    wget
-    usbutils
-    # This is required for nixos-rebuild with flakes.
-    gitMinimal
-  ];
-
   # Include the appropriate WiFi driver
   boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
-
-  # Get rid of Perl (ew)
-  environment.defaultPackages = [];
-  # Replace nano with kak
-  environment.variables.EDITOR = "kak";
   
   # Enable Sway!
   programs.sway = {
