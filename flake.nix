@@ -9,7 +9,9 @@
     };
   };
 
+  # TODO: Add a `format` output
   outputs = { self, nixpkgs, home-manager }: {
+    # TODO: Write some helper to make this system agnostic
     nixosConfigurations.v4 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
