@@ -1,6 +1,6 @@
-# User config (pie)
+# If you're looking for home manager config, that's under `home`.
 
-{ pkgs, ... }:
+{ ... }:
 
 {
   users.users.pie = {

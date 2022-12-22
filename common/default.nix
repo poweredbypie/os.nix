@@ -1,10 +1,13 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
+    ./doas.nix
     ./env.nix
-    ./i18n.nix
+    ./locale.nix
     ./net.nix
-    ./user
+    ./nix.nix
+    ./sound.nix
+    ./users.nix
   ];
 }

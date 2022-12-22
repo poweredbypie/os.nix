@@ -1,3 +1,3 @@
 # os.nix
 
-My NixOS configuration! That is all.
+My NixOS configuration!

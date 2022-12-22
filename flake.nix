@@ -13,11 +13,12 @@
     nixosConfigurations.v4 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./common
+        ./sys/v4
         home-manager.nixosModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
-            users.pie = import ./common/user/home.nix;
+            users.pie = import ./common/home;
           };
         }
       ];
