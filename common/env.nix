@@ -14,7 +14,5 @@
       # This is required for nixos-rebuild with flakes.
       gitMinimal
     ];
-    # Replace nano with kakoune
-    variables.EDITOR = "kak";
   };
 }
