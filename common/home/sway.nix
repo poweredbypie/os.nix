@@ -2,16 +2,18 @@
 
 let
   mod = "Mod4";
+  # Shared font config
+  fonts = {
+    names = ["monospace"];
+    size = 10.0;
+  };
 in {
   wayland.windowManager.sway = {
     enable = true;
     # Use nixpkgs for the actual sway package.
     package = null;
     config = {
-      fonts = {
-        names = ["monospace"];
-        size = 10.0;
-      };
+      inherit fonts;
       keybindings = {
         # Programs
         "${mod}+t" = "exec alacritty";
@@ -34,6 +36,7 @@ in {
         "Ctrl+Alt+Delete" = "exec swaymsg exit";
       };
       bars = [{
+        inherit fonts;
         position = "top";
         statusCommand = "while echo $(date +'%d.%m.%Y %H:%M:%S'); do sleep 1; done";
         command = "swaybar";
