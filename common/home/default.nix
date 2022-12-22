@@ -5,7 +5,7 @@
 {
   imports = [
     ./env.nix
-    ./sway.nix
+    ./sway
   ];
   
   home.packages = with pkgs; [
