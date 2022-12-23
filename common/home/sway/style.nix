@@ -14,6 +14,11 @@ let
   darkest = "#000000";
 in {
   wayland.windowManager.sway.config = {
+    # Default environment behavior stuff
+    workspaceLayout = "tabbed";
+    focus.mouseWarping = "container";
+
+    # Window / bar style and colors
     inherit fonts;
 
     window.border = 0;
