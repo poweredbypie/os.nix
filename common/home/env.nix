@@ -10,4 +10,8 @@
   home.sessionVariables = {
     EDITOR = "kak";
   };
+
+  home.shellAliases = {
+    pause = "systemctl suspend";
+  };
 }
