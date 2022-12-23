@@ -16,50 +16,53 @@ let
 
   # Helper stuff
   inherit (builtins) foldl' map;
+  # Folds a list of sets into a single set.
+  # Not sure if this is the best way of doing it...
   concat = (left: right: left // right);
-  fold = list: func: foldl' concat {} (map (i: func i) list);
+  foldList = list: func:
+    foldl' concat {} (map (i: func i) list);
 
-  # Workspace stuff (with loops)
+  # Workspace stuff
   spaces = let
     nums = map (i: toString i) (lib.lists.range 0 9);
-  in {
+    fold = func: foldList nums func;
+  in
     # Change to workspace i.
-    change = fold nums (i: {
+    fold (i: {
       "${meta + i}" = "workspace number ${i}";
-    });
+    }) //
     # Move focused window to workspace i.
-    move = fold nums (i: {
+    fold (i: {
       "${meta + shift + i}" = "move container to workspace number ${i}";
     });
-  };
 
-  # Movement stuff (also with loops)
+  # Movement stuff
   move = let
     inherit (lib.strings) toLower;
     keys = ["Left" "Right" "Up" "Down"];
-  in {
+    fold = func: foldList keys func;
+  in
     # Change focus
-    change = fold keys (key: {
+    fold (key: {
       "${meta + key}" = "focus ${toLower key}";
-    });
+    }) //
     # Move focused window
-    move = fold keys (key: {
+    fold (key: {
       "${meta + alt + key}" = "move ${toLower key}";
     });
-  };
 in {
   wayland.windowManager.sway.config.keybindings = {
-  # Programs
-  "${meta}t" = "exec ${term}";
-  "${meta}f" = "exec ${web}";
-  "${meta}p" = "exec ${progs}";
-  # TODO: Add screenshot utils here
+    # Programs
+    "${meta}t" = "exec ${term}";
+    "${meta}f" = "exec ${web}";
+    "${meta}p" = "exec ${progs}";
+    # TODO: Add screenshot utils here
 
-  # Change layout
-  "${meta}w" = "layout tabbed";
-  "${meta}e" = "layout toggle split";
-  # Close stuff
-  "${meta}x" = "kill";
-  "${ctrl + alt}Delete" = "exec swaymsg exit";
-  } // move.change // move.move // spaces.change // spaces.move;
+    # Change layout
+    "${meta}w" = "layout tabbed";
+    "${meta}e" = "layout toggle split";
+    # Close stuff
+    "${meta}x" = "kill";
+    "${ctrl + alt}Delete" = "exec swaymsg exit";
+  } // move // spaces;
 }
