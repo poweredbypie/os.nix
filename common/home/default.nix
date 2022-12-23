@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./alacritty.nix
     ./env.nix
     ./font.nix
     ./sway

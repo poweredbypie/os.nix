@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    # Terminal emulator
-    alacritty
     # Browser
     firefox
     # App launcher
