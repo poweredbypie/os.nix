@@ -29,11 +29,11 @@ let
   in
     # Change to workspace i.
     fold (i: {
-      "${meta + i}" = "workspace number ${i}";
+      "${meta + i}" = "workspace ${i}";
     }) //
     # Move focused window to workspace i.
     fold (i: {
-      "${meta + shift + i}" = "move container to workspace number ${i}";
+      "${meta + shift + i}" = "move container to workspace ${i}";
     });
 
   # Movement stuff
@@ -51,18 +51,22 @@ let
       "${meta + alt + key}" = "move ${toLower key}";
     });
 in {
-  wayland.windowManager.sway.config.keybindings = {
-    # Programs
-    "${meta}t" = "exec ${term}";
-    "${meta}f" = "exec ${web}";
-    "${meta}p" = "exec ${progs}";
-    # TODO: Add screenshot utils here
+  wayland.windowManager.sway.config = {
+    # Disable resize mode
+    modes = {};
+    keybindings = {
+      # Programs
+      "${meta}t" = "exec ${term}";
+      "${meta}f" = "exec ${web}";
+      "${meta}p" = "exec ${progs}";
+      # TODO: Add screenshot utils here
 
-    # Change layout
-    "${meta}w" = "layout tabbed";
-    "${meta}e" = "layout toggle split";
-    # Close stuff
-    "${meta}x" = "kill";
-    "${ctrl + alt}Delete" = "exec swaymsg exit";
-  } // move // spaces;
+      # Change layout
+      "${meta}w" = "layout tabbed";
+      "${meta}e" = "layout toggle split";
+      # Close stuff
+      "${meta}x" = "kill";
+      "${ctrl + alt}Delete" = "exec swaymsg exit";
+    } // move // spaces;
+  };
 }
