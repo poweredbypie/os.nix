@@ -1,12 +1,13 @@
 # Home manager-related config
 
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
     ./alacritty.nix
     ./env.nix
     ./font.nix
+    ./kak
     ./sway
   ];
 
