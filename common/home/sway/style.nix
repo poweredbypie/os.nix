@@ -15,8 +15,11 @@ let
 in {
   wayland.windowManager.sway.config = {
     inherit fonts;
+
+    window.border = 0;
     bars = [{
       inherit fonts;
+
       position = "top";
       statusCommand = "while echo $(date +'%d.%m.%Y %H:%M:%S'); do sleep 1; done";
 
