@@ -1,8 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.kakoune = {
     enable = true;
+    plugins = with pkgs; [
+      kak-lsp
+    ];
     config = {
       colorScheme = "gruvbox-dark";
       indentWidth = 4;
