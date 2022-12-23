@@ -5,6 +5,7 @@
 {
   imports = [
     ./env.nix
+    ./font.nix
     ./sway
   ];
 
