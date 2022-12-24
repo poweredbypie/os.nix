@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./fish.nix
     ./font.nix
+    ./gtk.nix
     ./kak
     ./sway
     ./zathura.nix
