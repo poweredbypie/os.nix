@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    # Browser
-    firefox
     # App launcher
     bemenu
     # Screenshot util
