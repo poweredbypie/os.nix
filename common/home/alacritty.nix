@@ -25,7 +25,7 @@
         {
           key = "Back";
           mods = "Control";
-          chars = "\x17";
+          chars = "\\x17";
         }
         # Bind search to Ctrl+F
         {
