@@ -1,10 +1,13 @@
 # Local environment config!
 
-{ ... }:
+{ pkgs, ... }:
 
 {
-  # This is required for home manager to edit env.
-  programs.bash.enable = true;
+  home.packages = [pkgs.fish];
+
+  programs.fish = {
+    enable = true;
+  };
 
   # Replace nano with kakoune
   home.sessionVariables = {

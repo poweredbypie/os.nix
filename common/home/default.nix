@@ -5,7 +5,7 @@
 {
   imports = [
     ./alacritty.nix
-    ./env.nix
+    ./fish.nix
     ./font.nix
     ./kak
     ./sway
