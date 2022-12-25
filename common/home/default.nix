@@ -10,6 +10,7 @@
     ./font.nix
     ./gtk.nix
     ./kak
+    ./llvm.nix
     ./sway
     ./zathura.nix
   ];
