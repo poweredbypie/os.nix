@@ -7,8 +7,6 @@ let
   web = "firefox";
   progs = "bemenu-run -b | xargs swaymsg exec --";
 
-  # TODO: Make use of this! It looks nicer
-  # meta = keys: "Mod4+${keys}";
   meta = "Mod4+";
   ctrl = "Ctrl+";
   shift = "Shift+";
@@ -59,11 +57,15 @@ in {
       "${meta}t" = "exec ${term}";
       "${meta}f" = "exec ${web}";
       "${meta}p" = "exec ${progs}";
-      # TODO: Add screenshot utils here
+
+      # Screenshot utils
+      "Print" = "exec grim -g \"$(slurp)\" - | wl-copy";
+      "Shift+Print" = "exec grim -g \"$(slurp -o)\" - | wl-copy";
 
       # Change layout
       "${meta}w" = "layout tabbed";
       "${meta}e" = "layout toggle split";
+
       # Close stuff
       "${meta}x" = "kill";
       "${ctrl + alt}Delete" = "exec swaymsg exit";
