@@ -10,6 +10,7 @@
     systemPackages = with pkgs; [
       kakoune
       usbutils
+      file
       # This is required for nixos-rebuild with flakes.
       gitMinimal
     ];
