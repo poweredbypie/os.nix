@@ -6,6 +6,7 @@ let
   term = "alacritty";
   web = "firefox";
   progs = "bemenu-run -b | xargs swaymsg exec --";
+  snap = args: "grim -g \"$(slurp ${args})\" - | wl-copy";
 
   meta = "Mod4+";
   ctrl = "Ctrl+";
@@ -59,8 +60,8 @@ in {
       "${meta}p" = "exec ${progs}";
 
       # Screenshot utils
-      "Print" = "exec grim -g \"$(slurp)\" - | wl-copy";
-      "Shift+Print" = "exec grim -g \"$(slurp -o)\" - | wl-copy";
+      "Print" = "exec ${snap ""}";
+      "Shift+Print" = "exec ${snap "-o"}";
 
       # Change layout
       "${meta}w" = "layout tabbed";
