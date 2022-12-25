@@ -72,5 +72,7 @@ in {
         inherit text;
       };
     };
+
+    output."*".bg = "${./yellowstone.jpg} fill";
   };
 }
