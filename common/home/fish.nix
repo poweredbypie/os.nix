@@ -3,7 +3,11 @@
 { pkgs, config, ... }:
 
 {
-  home.packages = [pkgs.fish];
+  home.packages = with pkgs; [
+    fish
+    # TODO: Move this out? Not sure where else to put it thought
+    neofetch
+  ];
 
   programs.fish = {
     enable = true;
