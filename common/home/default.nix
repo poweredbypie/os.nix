@@ -11,6 +11,7 @@
     ./gtk.nix
     ./kak
     ./llvm.nix
+    ./man.nix
     ./sway
     ./zathura.nix
   ];
