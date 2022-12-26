@@ -95,6 +95,10 @@
       # Load kak-lsp
       eval %sh{kak-lsp --kakoune -s $kak_session}
       lsp-auto-hover-enable
+
+      # Transparent background
+      face global Default rgb:ebdbb2,default
+      face global BufferPadding rgb:504945,default
     '';
   };
 }
