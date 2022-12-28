@@ -13,20 +13,27 @@
   # TODO: Add a `format` output
   outputs = { self, nixpkgs, nur, home-manager }: {
     # TODO: Write some helper to make this system agnostic
-    nixosConfigurations.v4 = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./common
-        ./sys/v4
-        home-manager.nixosModules.home-manager {
-          home-manager = {
-            useGlobalPkgs = true;
-            users.pie = import ./common/home;
-          };
-          # Add NUR for Firefox stuff
-          nixpkgs.overlays = [nur.overlay];
-        }
-      ];
-    };
+    nixosConfigurations.v4 =
+      let
+        args = {
+          misc = ./misc;
+        };
+      in nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./common
+          ./sys/v4
+          home-manager.nixosModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              users.pie = import ./common/home;
+            extraSpecialArgs = args;
+            };
+            # Add NUR for Firefox stuff
+            nixpkgs.overlays = [nur.overlay];
+          }
+        ];
+        specialArgs = args;
+      };
   };
 }

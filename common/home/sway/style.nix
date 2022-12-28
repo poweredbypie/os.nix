@@ -1,6 +1,6 @@
 # Font, colors, bar config, etc.
 
-{ ... }:
+{ misc, ... }:
 
 let
   fonts = {
@@ -73,6 +73,6 @@ in {
       };
     };
 
-    output."*".bg = "${./yellowstone.jpg} fill";
+    output."*".bg = "${misc}/yellowstone.jpg fill";
   };
 }
