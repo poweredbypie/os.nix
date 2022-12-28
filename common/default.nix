@@ -9,7 +9,7 @@
     ./net.nix
     ./nix.nix
     ./sound.nix
-    ./sway.nix
     ./users.nix
+    ./wm.nix
   ];
 }
