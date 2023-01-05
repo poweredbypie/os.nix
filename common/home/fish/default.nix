@@ -4,7 +4,6 @@
 
 {
   home.packages = with pkgs; [
-    fish
     # TODO: Move this out? Not sure where else to put it though
     neofetch
   ];
