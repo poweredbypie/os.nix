@@ -15,7 +15,7 @@
       let
         style = pkgs.writeText "greet.css" ''
           window {
-            background-image: url("file://${misc}/yellowstone.jpg");
+            background-image: url("${misc}/yellowstone.jpg");
             background-size: cover;
             background-position: center;
 
@@ -47,8 +47,8 @@
 
         config = pkgs.writeText "greet.sway" ''
           exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style} -c sway; swaymsg exit"
-          bindsym q "poweroff"
-          bindsym r "reboot"
+          bindsym Ctrl+q "poweroff"
+          bindsym Ctrl+r "reboot"
         '';
       in {
         default_session.command = "sway --config ${config}";
