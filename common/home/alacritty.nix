@@ -15,11 +15,7 @@
         blink_interval = 500;
         blink_timeout = 0;
       };
-      shell = {
-        # Use fish instead.
-        program = "fish";
-        args = ["--login"];
-      };
+      shell.program = "nnn";
       key_bindings = [
         # Bind Ctrl+Backspace to Ctrl+W (VSCode habit)
         {
