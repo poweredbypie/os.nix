@@ -9,6 +9,7 @@
     ./firefox
     ./fish
     ./font.nix
+    ./ghc.nix
     ./gtk.nix
     ./kak
     ./llvm.nix
