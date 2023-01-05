@@ -7,7 +7,7 @@
     ./alacritty.nix
     ./deno.nix
     ./firefox
-    ./fish.nix
+    ./fish
     ./font.nix
     ./gtk.nix
     ./kak
