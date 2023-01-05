@@ -24,5 +24,6 @@
   home.shellAliases = {
     pause = "systemctl suspend";
     rebuild = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/src/os.nix";
+    fs = "nnn";
   };
 }

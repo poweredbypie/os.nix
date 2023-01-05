@@ -14,6 +14,7 @@
     ./kak
     ./llvm.nix
     ./man.nix
+    ./nnn.nix
     ./sway
     ./zathura.nix
   ];
