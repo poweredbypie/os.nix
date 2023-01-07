@@ -12,28 +12,34 @@
 
   # TODO: Add a `format` output
   outputs = { self, nixpkgs, nur, home-manager }: {
-    # TODO: Write some helper to make this system agnostic
-    nixosConfigurations.v4 =
+    nixosConfigurations =
       let
-        args = {
-          misc = ./misc;
-        };
-      in nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./common
-          ./sys/v4
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              users.pie = import ./common/home;
-            extraSpecialArgs = args;
+        mkSystem = hostName: system:
+          let
+            args = {
+              misc = ./misc;
+              inherit hostName;
             };
-            # Add NUR for Firefox stuff
-            nixpkgs.overlays = [nur.overlay];
-          }
-        ];
-        specialArgs = args;
+          in nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./common
+              ./sys/${hostName}
+              home-manager.nixosModules.home-manager {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  users.pie = import ./common/home;
+                  extraSpecialArgs = args;
+                };
+                # Add NUR for Firefox plugins
+                nixpkgs.overlays = [nur.overlay];
+              }
+            ];
+            specialArgs = args;
+          };
+      in {
+        # Desktop
+        verthe = mkSystem "verthe" "x86-64-linux";
       };
   };
 }
