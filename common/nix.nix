@@ -10,7 +10,13 @@
     autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
   };
 
-  # Enable new CLI interface and flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # TODO: Configure nix store gc stuff
+  nix = {
+    # Enable new CLI interface and flakes
+    settings.experimental-features = [ "nix-command" "flakes" ];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 }
