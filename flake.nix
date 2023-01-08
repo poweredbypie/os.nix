@@ -10,8 +10,8 @@
     };
   };
 
-  # TODO: Add a `format` output
   outputs = { self, nixpkgs, nur, home-manager }: {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     nixosConfigurations =
       let
         mkSystem = hostName: system:
