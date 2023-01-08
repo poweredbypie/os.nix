@@ -40,6 +40,8 @@
       in {
         # Desktop
         verthe = mkSystem "verthe" "x86-64-linux";
+        # Laptop
+        zen = mkSystem "zen" "x86-64-linux";
       };
   };
 }
