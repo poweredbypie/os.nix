@@ -28,7 +28,12 @@
               home-manager.nixosModules.home-manager {
                 home-manager = {
                   useGlobalPkgs = true;
-                  users.pie = import ./common/home;
+                  users.pie = {
+                    imports = [
+                      ./common/home
+                      ./sys/${hostName}/home
+                    ];
+                  };
                   extraSpecialArgs = args;
                 };
                 # Add NUR for Firefox plugins
