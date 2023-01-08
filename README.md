@@ -17,6 +17,7 @@ Most of this can also be found under my `setup` GitHub list.
 These are some sources that helped me understand NixOS! Thank you:
 - [NixOS wiki](https://nixos.wiki/wiki/Flakes#Flake_schema)
 - [NixOS options search](https://search.nixos.org/options)
+- [Home Manager options](https://nix-community.github.io/home-manager/options.html)
 - [rycee](https://git.sr.ht/~rycee/configurations)
 - [notusknot](https://github.com/notusknot/dotfiles-nix)
 - [oxalica](https://github.com/oxalica/nixos-config)
