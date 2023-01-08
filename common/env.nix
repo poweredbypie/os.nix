@@ -5,7 +5,7 @@
 {
   environment = {
     # Get rid of Perl (ew)
-    defaultPackages = [];
+    defaultPackages = [ ];
     # Global packages (mostly just handy for root to have)
     systemPackages = with pkgs; [
       kakoune

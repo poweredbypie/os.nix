@@ -11,6 +11,6 @@
   };
 
   # Enable new CLI interface and flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # TODO: Configure nix store gc stuff
 }

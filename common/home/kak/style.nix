@@ -2,7 +2,7 @@
 
 {
   programs.kakoune = {
-    plugins = [pkgs.editorconfig-core-c];
+    plugins = [ pkgs.editorconfig-core-c ];
     config = {
       # Editorconfig-related options.
       hooks = [{

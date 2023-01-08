@@ -9,7 +9,7 @@
     ];
     fontconfig = {
       enable = true;
-      defaultFonts.monospace = ["IBM Plex Mono SmBld"];
+      defaultFonts.monospace = [ "IBM Plex Mono SmBld" ];
     };
   };
 }

@@ -8,7 +8,7 @@
     doas = {
       enable = true;
       extraRules = [{
-        groups = ["wheel"];
+        groups = [ "wheel" ];
         # This is required for `nixos-rebuild` to work!
         keepEnv = true;
         # This is just convenient to have.

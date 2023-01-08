@@ -50,7 +50,8 @@
           bindsym Ctrl+q "poweroff"
           bindsym Ctrl+r "reboot"
         '';
-      in {
+      in
+      {
         default_session.command = "sway --config ${config}";
       };
   };

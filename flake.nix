@@ -20,12 +20,14 @@
               misc = ./misc;
               inherit hostName;
             };
-          in nixpkgs.lib.nixosSystem {
+          in
+          nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
               ./common
               ./sys/${hostName}
-              home-manager.nixosModules.home-manager {
+              home-manager.nixosModules.home-manager
+              {
                 home-manager = {
                   useGlobalPkgs = true;
                   users.pie = {
@@ -37,12 +39,13 @@
                   extraSpecialArgs = args;
                 };
                 # Add NUR for Firefox plugins
-                nixpkgs.overlays = [nur.overlay];
+                nixpkgs.overlays = [ nur.overlay ];
               }
             ];
             specialArgs = args;
           };
-      in {
+      in
+      {
         # Desktop
         verthe = mkSystem "verthe" "x86-64-linux";
         # Laptop

@@ -4,7 +4,7 @@
   # TODO: Clean this up and use more Nix-config like setup!
   # If it isn't possible with home-manager, we can make our own overlay.
   programs.kakoune = {
-    plugins = [pkgs.kak-lsp];
+    plugins = [ pkgs.kak-lsp ];
     config = {
       hooks = [
         # Enables kak-lsp.

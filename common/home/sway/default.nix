@@ -5,7 +5,8 @@
     # App launcher
     bemenu
     # Screenshot util
-    grim slurp
+    grim
+    slurp
     # Allow access to clipboard from scripts
     wl-clipboard
   ];

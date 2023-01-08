@@ -2,5 +2,5 @@
 { pkgs, ... }:
 
 {
-  home.packages = [pkgs.ghc];
+  home.packages = [ pkgs.ghc ];
 }

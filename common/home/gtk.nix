@@ -5,7 +5,8 @@ let
   dark = {
     extraConfig.gtk-application-prefer-dark-theme = true;
   };
-in {
+in
+{
   gtk = {
     enable = true;
     gtk3 = dark;

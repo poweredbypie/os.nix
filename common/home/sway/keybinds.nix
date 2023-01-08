@@ -19,40 +19,45 @@ let
   # Not sure if this is the best way of doing it...
   concat = (left: right: left // right);
   foldList = list: func:
-    foldl' concat {} (map (i: func i) list);
+    foldl' concat { } (map (i: func i) list);
 
   # Workspace stuff
-  spaces = let
-    nums = map (i: toString i) (lib.lists.range 0 9);
-    fold = func: foldList nums func;
-  in
+  spaces =
+    let
+      nums = map (i: toString i) (lib.lists.range 0 9);
+      fold = func: foldList nums func;
+    in
     # Change to workspace i.
-    fold (i: {
-      "${meta + i}" = "workspace ${i}";
-    }) //
+    fold
+      (i: {
+        "${meta + i}" = "workspace ${i}";
+      }) //
     # Move focused window to workspace i.
     fold (i: {
       "${meta + shift + i}" = "move container to workspace ${i}";
     });
 
   # Movement stuff
-  move = let
-    inherit (lib.strings) toLower;
-    keys = ["Left" "Right" "Up" "Down"];
-    fold = func: foldList keys func;
-  in
+  move =
+    let
+      inherit (lib.strings) toLower;
+      keys = [ "Left" "Right" "Up" "Down" ];
+      fold = func: foldList keys func;
+    in
     # Change focus
-    fold (key: {
-      "${meta + key}" = "focus ${toLower key}";
-    }) //
+    fold
+      (key: {
+        "${meta + key}" = "focus ${toLower key}";
+      }) //
     # Move focused window
     fold (key: {
       "${meta + alt + key}" = "move ${toLower key}";
     });
-in {
+in
+{
   wayland.windowManager.sway.config = {
     # Disable resize mode
-    modes = {};
+    modes = { };
     keybindings = {
       # Programs
       "${meta}t" = "exec ${term}";

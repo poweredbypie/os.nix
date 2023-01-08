@@ -7,7 +7,8 @@
       let
         home = config.home.homeDirectory;
         docs = "${home}/docs";
-      in {
+      in
+      {
         createDirectories = true;
         desktop = docs;
         documents = docs;

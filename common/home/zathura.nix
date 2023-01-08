@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = [pkgs.zathura];
+  home.packages = [ pkgs.zathura ];
 
   programs.zathura = {
     enable = true;

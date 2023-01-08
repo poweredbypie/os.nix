@@ -4,7 +4,7 @@
 
 let
   fonts = {
-    names = ["monospace"];
+    names = [ "monospace" ];
     size = 10.0;
   };
   text = "#ffffff";
@@ -12,7 +12,8 @@ let
   middle = "#966924";
   dark = "#353535";
   darkest = "#000000";
-in {
+in
+{
   wayland.windowManager.sway.config = {
     # Default environment behavior stuff
     workspaceLayout = "tabbed";

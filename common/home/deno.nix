@@ -3,5 +3,5 @@
 { pkgs, ... }:
 
 {
-  home.packages = [pkgs.deno];
+  home.packages = [ pkgs.deno ];
 }

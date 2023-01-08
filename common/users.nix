@@ -6,7 +6,7 @@
   users.users.pie = {
     createHome = true;
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable doas
+    extraGroups = [ "wheel" ]; # Enable doas
     shell = pkgs.fish;
   };
 }
