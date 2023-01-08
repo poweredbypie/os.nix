@@ -54,4 +54,9 @@
         default_session.command = "sway --config ${config}";
       };
   };
+
+  environment.etc."greetd/environments".text = ''
+    sway
+    fish
+  '';
 }
