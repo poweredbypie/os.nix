@@ -6,7 +6,7 @@ The source files that make up my NixOS setup(s)!
 
 # The stuff I use
 Most of this can also be found under my `setup` GitHub list.
-- [swaywm](https://github.com/swaywm/sway): window manager
+- [sway](https://github.com/swaywm/sway): window manager
 - [fish](https://github.com/fish-shell/fish-shell): shell
 - [alacritty](https://github.com/alacritty/alacritty): terminal emulator
 - [kakoune](https://github.com/jarun/nnn): text editor
