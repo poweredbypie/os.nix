@@ -11,4 +11,8 @@
       efi.canTouchEfiVariables = true;
     };
   };
+
+  hardware = {
+    bluetooth.enable = true;
+  };
 }
