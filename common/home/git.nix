@@ -12,11 +12,10 @@
       r = "rebase";
     };
 
+    userName = "PoweredByPie";
+    userEmail = "poweredbypie@users.noreply.github.com";
+
     extraConfig = {
-      user = {
-        email = "poweredbypie@users.noreply.github.com";
-        name = "PoweredByPie";
-      };
       init.defaultBranch = "main";
     };
   };
