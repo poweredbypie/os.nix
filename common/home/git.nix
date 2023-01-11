@@ -8,8 +8,10 @@
     aliases = {
       a = "add";
       c = "commit";
+      l = "log";
       p = "push";
       r = "rebase";
+      s = "status";
     };
 
     userName = "PoweredByPie";
