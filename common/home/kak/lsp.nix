@@ -4,13 +4,16 @@
   # TODO: Clean this up and use more Nix-config like setup!
   # If it isn't possible with home-manager, we can make our own overlay.
   programs.kakoune = {
-    plugins = [ pkgs.kak-lsp ];
+    plugins = with pkgs; [
+      kak-lsp
+      rnix-lsp
+    ];
     config = {
       hooks = [
         # Enables kak-lsp.
         {
           name = "WinSetOption";
-          option = "filetype=(c|cpp)";
+          option = "filetype=(c|cpp|nix)";
           commands = ''
             lsp-enable-window
             # Enables nicer diagnostics
