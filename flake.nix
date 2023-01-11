@@ -14,18 +14,21 @@
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     nixosConfigurations =
       let
-        mkSystem = hostName: system:
+        mkSystem = name: system:
           let
             args = {
               misc = ./misc;
-              inherit hostName;
             };
           in
           nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
               ./common
-              ./sys/${hostName}
+              ./sys/${name}
+              # Set the hostname in the flake.
+              {
+                networking.hostName = name;
+              }
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -33,7 +36,7 @@
                   users.pie = {
                     imports = [
                       ./common/home
-                      ./sys/${hostName}/home
+                      ./sys/${name}/home
                     ];
                   };
                   extraSpecialArgs = args;

@@ -1,10 +1,9 @@
 # Internet, WiFi config
 
-{ hostName, ... }:
+{ ... }:
 
 {
   networking = {
-    inherit hostName;
     # Use iwd.
     wireless.iwd = {
       enable = true;
