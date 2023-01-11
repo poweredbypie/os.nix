@@ -10,6 +10,7 @@
     ./fish
     ./font.nix
     ./ghc.nix
+    ./git.nix
     ./gtk.nix
     ./kak
     ./llvm.nix
