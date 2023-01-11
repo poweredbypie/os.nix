@@ -17,7 +17,7 @@
     ./man.nix
     ./nnn.nix
     ./sway
-    ./xdg.nix
+    ./xdg
     ./zathura.nix
   ];
 
