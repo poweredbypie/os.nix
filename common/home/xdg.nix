@@ -1,6 +1,7 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 {
+  home.packages = [ pkgs.xdg-utils ];
   xdg = {
     enable = true;
     userDirs =
