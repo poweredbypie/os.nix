@@ -9,8 +9,6 @@
       enable = true;
       extraRules = [{
         groups = [ "wheel" ];
-        # This is required for `nixos-rebuild` to work!
-        keepEnv = true;
         # This is just convenient to have.
         persist = true;
       }];
