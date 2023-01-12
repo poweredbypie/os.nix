@@ -71,6 +71,7 @@ in
       # Change layout
       "${meta}w" = "layout tabbed";
       "${meta}e" = "layout toggle split";
+      "${meta}Space" = "fullscreen";
 
       # Close stuff
       "${meta}x" = "kill";
