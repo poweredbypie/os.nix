@@ -7,13 +7,14 @@
     plugins = with pkgs; [
       kak-lsp
       rnix-lsp
+      zls
     ];
     config = {
       hooks = [
         # Enables kak-lsp.
         {
           name = "WinSetOption";
-          option = "filetype=(c|cpp|nix)";
+          option = "filetype=(c|cpp|nix|zig)";
           commands = ''
             lsp-enable-window
             # Enables nicer diagnostics

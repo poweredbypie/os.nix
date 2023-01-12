@@ -19,6 +19,7 @@
     ./sway
     ./xdg
     ./zathura.nix
+    ./zig.nix
   ];
 
   # Same as the Nix version, I've heard I shouldn't touch this.
