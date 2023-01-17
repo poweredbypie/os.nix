@@ -15,7 +15,10 @@
       tabStop = 4;
 
       # Highlighters, status, etc.
-      numberLines.enable = true;
+      numberLines = {
+        relative = true;
+        enable = true;
+      };
       showWhitespace.enable = true;
       scrollOff.lines = 5;
       ui = {
