@@ -6,6 +6,10 @@ let
   term = "alacritty";
   browse = "firefox";
   run = "bemenu-run -b | xargs swaymsg exec --";
+  # TODO: Annoyingly, I have Alacritty launch the shell,
+  # and have the shell launch nnn. Otherwise nnn can't open
+  # kakoune to edit text files. I wonder why...
+  fs = "${term} -e fish -c nnn";
   snap = args: "grim -g \"$(slurp ${args})\" - | wl-copy";
 
   meta = "Mod4+";
@@ -63,7 +67,7 @@ in
       "${meta}t" = "exec ${term}";
       "${meta}b" = "exec ${browse}";
       "${meta}r" = "exec ${run}";
-      "${meta}f" = "exec ${term} -e nnn";
+      "${meta}f" = "exec ${fs}";
 
       # Screenshot utils
       "Print" = "exec ${snap ""}";
