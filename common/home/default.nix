@@ -15,6 +15,7 @@
     ./kak
     ./llvm.nix
     ./man.nix
+    ./osu.nix
     ./nnn.nix
     ./sway
     ./xdg

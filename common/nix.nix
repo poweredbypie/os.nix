@@ -19,4 +19,7 @@
       options = "--delete-older-than 7d";
     };
   };
+
+  # Osu has proprietary dependencies
+  nixpkgs.config.allowUnfree = true;
 }
