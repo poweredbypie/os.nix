@@ -37,9 +37,10 @@ let
         "${meta + i}" = "workspace ${i}";
       }) //
     # Move focused window to workspace i.
-    fold (i: {
-      "${meta + shift + i}" = "move container to workspace ${i}";
-    });
+    fold
+      (i: {
+        "${meta + shift + i}" = "move container to workspace ${i}";
+      });
 
   # Movement stuff
   move =
@@ -54,9 +55,10 @@ let
         "${meta + key}" = "focus ${toLower key}";
       }) //
     # Move focused window
-    fold (key: {
-      "${meta + alt + key}" = "move ${toLower key}";
-    });
+    fold
+      (key: {
+        "${meta + alt + key}" = "move ${toLower key}";
+      });
 in
 {
   wayland.windowManager.sway.config = {
