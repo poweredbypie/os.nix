@@ -5,7 +5,12 @@
   # If it isn't possible with home-manager, we can make our own overlay.
   programs.kakoune = {
     plugins = with pkgs; [
+      # These are enabled elsewhere.
+      # deno
+      # clang-tools_14
       kak-lsp
+      # Currently not super stable; maybe later!
+      # nil
       rnix-lsp
       zls
     ];
@@ -14,7 +19,7 @@
         # Enables kak-lsp.
         {
           name = "WinSetOption";
-          option = "filetype=(c|cpp|nix|zig)";
+         option = "filetype=(typescript|c|cpp|nix|zig)";
           commands = ''
             lsp-enable-window
             # Enables nicer diagnostics
@@ -62,4 +67,8 @@
       lsp-auto-hover-enable
     '';
   };
+
+  # TODO: Use the standard library func to configure this in Nix!
+  # Big hack!!! I love hackiness
+  xdg.configFile."kak-lsp/kak-lsp.toml".source = ./kak-lsp.toml;
 }
