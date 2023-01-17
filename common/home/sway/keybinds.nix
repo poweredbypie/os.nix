@@ -4,8 +4,8 @@
 
 let
   term = "alacritty";
-  web = "firefox";
-  progs = "bemenu-run -b | xargs swaymsg exec --";
+  browse = "firefox";
+  run = "bemenu-run -b | xargs swaymsg exec --";
   snap = args: "grim -g \"$(slurp ${args})\" - | wl-copy";
 
   meta = "Mod4+";
@@ -61,16 +61,17 @@ in
     keybindings = {
       # Programs
       "${meta}t" = "exec ${term}";
-      "${meta}f" = "exec ${web}";
-      "${meta}p" = "exec ${progs}";
+      "${meta}b" = "exec ${browse}";
+      "${meta}r" = "exec ${run}";
+      "${meta}f" = "exec ${term} -e nnn";
 
       # Screenshot utils
       "Print" = "exec ${snap ""}";
       "Shift+Print" = "exec ${snap "-o"}";
 
       # Change layout
-      "${meta}w" = "layout tabbed";
-      "${meta}e" = "layout toggle split";
+      "${meta}comma" = "layout tabbed";
+      "${meta}period" = "layout toggle split";
       "${meta}Space" = "fullscreen";
 
       # Close stuff
