@@ -23,6 +23,9 @@ in
     inherit fonts;
 
     window.border = 0;
+
+    gaps.inner = 5;
+
     bars = [{
       inherit fonts;
 
