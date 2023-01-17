@@ -4,7 +4,7 @@
   xdg.desktopEntries.kak = {
     name = "kakoune";
     comment = "A better code editor";
-    exec = "kak";
+    exec = "alacritty -e kak";
     terminal = true;
     mimeType = [
       "text/plain"
