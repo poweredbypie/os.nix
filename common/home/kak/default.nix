@@ -3,7 +3,7 @@
 {
   imports = [
     ./keybinds.nix
-    ./lsp.nix
+    ./lsp
     ./style.nix
   ];
 
