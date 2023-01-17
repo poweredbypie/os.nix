@@ -14,6 +14,7 @@
     zls
   ];
 
+  # TODO: This is so silly hacky please make an overlay to make this better lol
   xdg.configFile =
     let
       lsp = "kak-lsp";
@@ -23,7 +24,7 @@
       "${lsp}/${lsp}.toml".source = toTOML {
         snippet_support = true;
         verbosity = 2;
-        # exit session if no requests were received during given period in seconds
+        # From stock: "exit session if no requests were received during given period in seconds"
         server.timeout = 1800;
 
         language = {
