@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  # This is really bad!
+  # TODO: This is really bad!
   # We shouldn't be referring to a home directory as a mountpoint.
   # Potential solution: Make a /docs folder? But make it rwx for the users group?
   fileSystems =
@@ -20,7 +20,7 @@
         label = "seagate";
         fsType = "ntfs3";
         options = perms ++ [
-          # `noatime` might be beneficial to load times? Try later
+          # TODO: `noatime` might be beneficial to load times? Try later
           # Osu reference??
           "nofail"
         ];
