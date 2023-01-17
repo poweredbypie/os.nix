@@ -9,6 +9,7 @@
     "type:touchpad" = {
       scroll_factor = "0.6";
       natural_scroll = "enabled";
+      dwt = "enabled";
     };
     # Lower sensitivity
     "5426:138:Razer_Razer_Viper_Mini".pointer_accel = "-0.2";
