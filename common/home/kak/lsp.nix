@@ -19,7 +19,7 @@
         # Enables kak-lsp.
         {
           name = "WinSetOption";
-         option = "filetype=(typescript|c|cpp|nix|zig)";
+          option = "filetype=(typescript|c|cpp|nix|zig)";
           commands = ''
             lsp-enable-window
             # Enables nicer diagnostics
