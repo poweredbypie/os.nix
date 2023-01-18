@@ -14,9 +14,15 @@
         "${top}".pos = "0 0";
         "${bot}".pos = "0 1080";
       };
-      workspaceOutputAssign = [{
-        output = "${top}";
-        workspace = "0";
-      }];
+      workspaceOutputAssign = [
+        {
+          output = top;
+          workspace = "1";
+        }
+        {
+          output = bot;
+          workspace = "2";
+        }
+      ];
     };
 }
