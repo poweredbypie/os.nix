@@ -76,8 +76,7 @@ in
       "Shift+Print" = "exec ${snap "-o"}";
 
       # Change layout
-      "${meta}comma" = "layout tabbed";
-      "${meta}period" = "layout toggle split";
+      "${meta}Return" = "layout toggle split tabbed";
       "${meta}Space" = "fullscreen";
 
       # Close stuff
