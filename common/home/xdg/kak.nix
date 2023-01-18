@@ -8,8 +8,16 @@
     terminal = true;
     mimeType = [
       "text/plain"
-      "text/x-c"
-      "text/x-c++"
+      "text/x-csrc"
+      "text/x-chdr"
+      "text/x-c++src"
+      "text/x-c++hdr"
+      "text/markdown"
+      # This is TypeScript ???
+      "text/vnd.trolltech.linguist"
+      "text/css"
+      "text/html"
+      "application/json"
     ];
   };
 }
