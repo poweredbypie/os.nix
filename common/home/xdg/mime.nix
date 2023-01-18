@@ -1,32 +1,30 @@
-{ ... }:
+{ pkgs, lib, ... }:
 
 {
+  home.packages = with pkgs; [
+    handlr
+    # TODO: This is really hacky. I don't know if I should fix it though.
+    # Override xdg-open with handlr
+    (lib.hiPrio (writeShellScriptBin "xdg-open" "exec handlr open \"$@\""))
+  ];
+
   xdg = {
     mime.enable = true;
     mimeApps = {
       enable = true;
       defaultApplications =
         let
-          inherit (builtins) map listToAttrs;
-          kak = "kak.desktop";
-
-          text = [
-            "plain"
-            "x-csrc"
-            "x-chdr"
-            "x-c++src"
-            "x-c++hdr"
-            "markdown"
-            "vnd.trolltech.linguist"
-            "css"
-            "html"
-          ];
-          list = listToAttrs (map (i: { name = "text/${i}"; value = kak; }) text);
+          text = "kak.desktop";
+          browse = "firefox.desktop";
         in
         {
           "x-scheme-handler/file" = "nnn.desktop";
-          "application/json" = kak;
-        } // list;
+          "x-scheme-handler/terminal" = "Alacritty.desktop";
+          "x-scheme-handler/http" = browse;
+          "x-scheme-handler/https" = browse;
+          "text/*" = text;
+          "application/json" = text;
+        };
     };
   };
 }

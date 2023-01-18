@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ pkgs.xdg-utils ];
-
   imports = [
     ./bash.nix
     ./dirs.nix
