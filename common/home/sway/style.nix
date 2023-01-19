@@ -22,7 +22,7 @@ in
     # Window / bar style and colors
     inherit fonts;
 
-    window.border = 0;
+    window.border = 1;
 
     gaps.inner = 5;
 
