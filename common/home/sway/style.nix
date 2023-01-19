@@ -16,7 +16,7 @@ in
 {
   wayland.windowManager.sway.config = {
     # Default environment behavior stuff
-    workspaceLayout = "tabbed";
+    workspaceLayout = "default";
     focus.mouseWarping = "container";
 
     # Window / bar style and colors
