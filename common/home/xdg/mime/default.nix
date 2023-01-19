@@ -30,6 +30,7 @@
           "x-scheme-handler/https" = browse;
           "text/*" = text;
           "application/json" = text;
+          "application/pdf" = "org.pwmt.zathura.desktop";
         };
     };
   };
