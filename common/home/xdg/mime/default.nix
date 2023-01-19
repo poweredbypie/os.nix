@@ -28,6 +28,7 @@
           "x-scheme-handler/terminal" = "Alacritty.desktop";
           "x-scheme-handler/http" = browse;
           "x-scheme-handler/https" = browse;
+          "image/*" = browse;
           "text/*" = text;
           "application/json" = text;
           "application/pdf" = "org.pwmt.zathura.desktop";
