@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 
 {
+  imports = [
+    ./kak.nix
+    ./nnn.nix
+  ];
+
   home.packages = with pkgs; [
     handlr
     # TODO: This is really hacky. I don't know if I should fix it though.
