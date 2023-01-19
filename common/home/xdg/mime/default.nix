@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
     handlr
+    # https://github.com/oxalica/nixos-config/blob/main/home/modules/mime-apps.nix#L16
     # TODO: This is really hacky. I don't know if I should fix it though.
     # Override xdg-open with handlr
     (lib.hiPrio (writeShellScriptBin "xdg-open" "exec handlr open \"$@\""))
