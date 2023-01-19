@@ -1,50 +1,10 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  home.packages = [ pkgs.firefox ];
+  imports = [
+    ./extensions.nix
+    ./profile.nix
+  ];
 
-  programs.firefox = {
-    enable = true;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      auto-tab-discard
-      ublock-origin
-    ];
-    profiles.pie = {
-      isDefault = true;
-      bookmarks = [{
-        name = "Toolbar";
-        toolbar = true;
-        bookmarks = [
-          {
-            name = "Home Manager options";
-            url = "https://nix-community.github.io/home-manager/options.html";
-          }
-          {
-            name = "NixOS Search";
-            url = "https://search.nixos.org/packages";
-          }
-        ];
-      }];
-      settings = {
-        # Use Zathura instead
-        "pdfjs.disabled" = true;
-        # Disable Pocket stuff
-        "extensions.pocket.enabled" = false;
-        "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-        # Disable Firefox view thing
-        "browser.tabs.firefox-view" = false;
-        # Only use HTTPS by default
-        "dom.security.https_only_mode" = true;
-        # Smooth scroll sucks!!!
-        "general.smoothScroll" = false;
-        # These correspond to the "strict mode" in about:preferences.
-        "privacy.annotate_channels.strict_list.enabled" = true;
-        "privacy.partition.network_state.ocsp_cache" = true;
-        "privacy.query_stripping.enabled" = true;
-        "privacy.query_stripping.enabled.pbmode" = true;
-        "privacy.trackingprotection.enabled" = true;
-        "privacy.trackingprotection.socialtracking.enabled" = true;
-      };
-    };
-  };
+  programs.firefox.enable = true;
 }
