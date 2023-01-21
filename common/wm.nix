@@ -52,6 +52,8 @@
         '';
 
         config = pkgs.writeText "greet.sway" ''
+          # Fix XDG portal issue
+          exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
           exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style} -c sway; swaymsg exit"
           bindsym Ctrl+q "poweroff"
           bindsym Ctrl+r "reboot"
