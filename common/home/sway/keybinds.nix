@@ -10,7 +10,8 @@ let
   # and have the shell launch nnn. Otherwise nnn can't open
   # kakoune to edit text files. I wonder why...
   fs = "${term} -e fish -c nnn";
-  snap = args: "grim -g \"$(slurp ${args})\" - | wl-copy";
+  snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
+  sound = cmd: val: "exec wpctl set-${cmd} @DEFAULT_SINK@ ${val}";
 
   meta = "Mod4+";
   ctrl = "Ctrl+";
@@ -72,8 +73,13 @@ in
       "${meta}f" = "exec ${fs}";
 
       # Screenshot utils
-      "Print" = "exec ${snap ""}";
-      "Shift+Print" = "exec ${snap "-o"}";
+      "Print" = snap "";
+      "Shift+Print" = snap "-o";
+
+      # Volume
+      "XF86AudioLowerVolume" = sound "volume" "0.1-";
+      "XF86AudioRaiseVolume" = sound "volume" "0.1+";
+      "XF86AudioMute" = sound "mute" "toggle";
 
       # Change layout
       "${meta}Return" = "layout toggle split tabbed";
