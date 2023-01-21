@@ -9,6 +9,12 @@
   # I don't use anything that doesn't natively support wayland
   programs.xwayland.enable = false;
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   services.greetd = {
     enable = true;
     settings =
