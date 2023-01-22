@@ -15,10 +15,10 @@
       music = media;
       pictures = media;
       videos = media;
-      download = "${home}/tmp";
+      download = "${home}/dl";
       publicShare = null;
       templates = null;
-      # TODO: Is this even a good idea???
+      # For any source code
       extraConfig.XDG_SOURCE_DIR = "${home}/src";
     };
 }
