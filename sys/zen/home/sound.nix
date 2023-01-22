@@ -11,8 +11,6 @@
       sink = "alsa_output.pci-0000_05_00.1.HiFi__hw_Generic_3__sink";
     in
     toINI {
-      default-nodes = {
-        "default.configured.audio.sink" = sink;
-      };
+      default-nodes."default.configured.audio.sink" = sink;
     };
 }
