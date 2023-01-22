@@ -7,6 +7,7 @@
       docs = "${home}/docs";
     in
     {
+      enable = true;
       createDirectories = true;
       desktop = docs;
       documents = docs;
