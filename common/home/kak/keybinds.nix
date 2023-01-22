@@ -41,5 +41,17 @@
       mode = "insert";
       effect = "<esc>bdi";
     }
+    # Thanks Luke
+    # https://youtu.be/x4KYASmFT0o?t=140
+    {
+      key = "w";
+      mode = "user";
+      effect = ":write<ret>";
+    }
+    {
+      key = "q";
+      mode = "user";
+      effect = ":quit!<ret>";
+    }
   ];
 }
