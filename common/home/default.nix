@@ -14,6 +14,7 @@
     ./gtk.nix
     ./kak
     ./llvm.nix
+    ./mako.nix
     ./man.nix
     ./osu.nix
     ./nnn.nix
