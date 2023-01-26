@@ -4,9 +4,10 @@
   imports = [
     ./boot.nix
     ./ccache.nix
-    ./fs.nix
+    ./drives.nix
     ./hardware-configuration.nix
     ./postgres.nix
+    ./power.nix
     ./print.nix
   ];
 }
