@@ -38,6 +38,12 @@
             roots = [ "flake.nix" "shell.nix" ".git" ".hg" ];
             command = "rnix-lsp";
           };
+          javascript = {
+            filetypes = [ "javascript" ];
+            roots = [ "package.json" ];
+            command = "deno";
+            args = [ "lsp" ];
+          };
           typescript = {
             filetypes = [ "typescript" ];
             roots = [ "package.json" "tsconfig.json" ".git" ".hg" ];
