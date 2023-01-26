@@ -4,7 +4,6 @@
   imports = [
     ./bash.nix
     ./dirs.nix
-    ./less.nix
     ./mime
   ];
 
