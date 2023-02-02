@@ -3,15 +3,26 @@
 { pkgs, ... }:
 
 {
-  programs.kakoune.plugins = with pkgs; [
-    # These are enabled elsewhere.
-    # deno
-    # clang-tools_14
+  programs.kakoune.plugins = with pkgs; with nodePackages_latest; [
     kak-lsp
+
+    # C / C++
+    # clang-tools_14
+
+    # Nix
     # Currently not super stable; maybe later!
     # nil
     rnix-lsp
+
+    # Zig
     zls
+
+    # JS / TS
+    # deno
+    typescript-language-server
+    vscode-html-languageserver-bin
+    vscode-css-languageserver-bin
+    vscode-json-languageserver-bin
   ];
 
   # TODO: This is so silly hacky please make an overlay to make this better lol
@@ -41,20 +52,25 @@
           javascript = {
             filetypes = [ "javascript" ];
             roots = [ "package.json" ];
-            command = "deno";
-            args = [ "lsp" ];
+            command = "typescript-language-server";
           };
           typescript = {
             filetypes = [ "typescript" ];
-            roots = [ "package.json" "tsconfig.json" ".git" ".hg" ];
-            command = "deno";
-            args = [ "lsp" ];
-
-            settings.deno = {
-              enable = true;
-              lint = true;
-            };
+            roots = [ "package.json" ];
+            command = "typescript-language-server";
+            args = [ "--stdio" ];
           };
+          # typescript = {
+          #   filetypes = [ "typescript" ];
+          #   roots = [ "deno.json" ".git" ".hg" ];
+          #   command = "deno";
+          #   args = [ "lsp" ];
+
+          #   settings.deno = {
+          #     enable = true;
+          #     lint = true;
+          #   };
+          # };
           zig = {
             filetypes = [ "zig" ];
             roots = [ "build.zig" ];

@@ -5,13 +5,13 @@
 {
   imports = [
     ./alacritty.nix
-    ./deno.nix
     ./firefox
     ./fish
     ./font.nix
     ./ghc.nix
     ./git.nix
     ./gtk.nix
+    ./js.nix
     ./kak
     ./llvm.nix
     ./mako.nix
