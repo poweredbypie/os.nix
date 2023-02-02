@@ -1,6 +1,6 @@
 # Kakoune and LSP client interaction setup.
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.kakoune = {
@@ -8,7 +8,7 @@
       # Enables kak-lsp.
       {
         name = "WinSetOption";
-        option = "filetype=(javascript|typescript|c|cpp|nix|zig)";
+        option = "filetype=(javascript|typescript|html|css|json|c|cpp|nix|zig)";
         commands = ''
           lsp-enable-window
           # Enables nicer diagnostics
@@ -51,7 +51,7 @@
     ];
     # Load kak-lsp on startup.
     extraConfig = ''
-      eval %sh{kak-lsp --kakoune -s $kak_session}
+      eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       lsp-auto-hover-enable
     '';
   };

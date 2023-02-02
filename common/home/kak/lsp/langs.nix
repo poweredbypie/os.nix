@@ -3,33 +3,20 @@
 { pkgs, ... }:
 
 {
-  programs.kakoune.plugins = with pkgs; with nodePackages_latest; [
-    kak-lsp
-
-    # C / C++
-    # clang-tools_14
-
-    # Nix
-    # Currently not super stable; maybe later!
-    # nil
-    rnix-lsp
-
-    # Zig
-    zls
-
-    # JS / TS
-    # deno
-    typescript-language-server
-    vscode-html-languageserver-bin
-    vscode-css-languageserver-bin
-    vscode-json-languageserver-bin
-  ];
-
   # TODO: This is so silly hacky please make an overlay to make this better lol
   xdg.configFile =
     let
       lsp = "kak-lsp";
       toTOML = config: (pkgs.formats.toml { }).generate "${lsp}.toml" config;
+      lsps = {
+        cxx = "${pkgs.clang-tools_14}/bin/clangd";
+        nix = "${pkgs.rnix-lsp}/bin/rnix-lsp";
+        ts = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
+        html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
+        css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
+        json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
+        zig = "${pkgs.zls}/bin/zls";
+      };
     in
     {
       "${lsp}/${lsp}.toml".source = toTOML {
@@ -42,22 +29,41 @@
           c_cpp = {
             filetypes = [ "c" "cpp" ];
             roots = [ "compile_commands.json" ".clangd" ".git" ".hg" ];
-            command = "clangd";
+            command = lsps.cxx;
+          };
+          css = {
+            filetypes = [ "css" ];
+            roots = [ "package.json" ];
+            command = lsps.css;
+            args = [ "--stdio" ];
+          };
+          html = {
+            filetypes = [ "html" ];
+            roots = [ "package.json" ];
+            command = lsps.html;
+            args = [ "--stdio" ];
           };
           nix = {
             filetypes = [ "nix" ];
             roots = [ "flake.nix" "shell.nix" ".git" ".hg" ];
-            command = "rnix-lsp";
+            command = lsps.nix;
           };
           javascript = {
             filetypes = [ "javascript" ];
             roots = [ "package.json" ];
-            command = "typescript-language-server";
+            command = lsps.ts;
+            args = [ "--stdio" ];
+          };
+          json = {
+            filetypes = [ "json" ];
+            roots = [ "package.json" ];
+            command = lsps.json;
+            args = [ "--stdio" ];
           };
           typescript = {
             filetypes = [ "typescript" ];
             roots = [ "package.json" ];
-            command = "typescript-language-server";
+            command = lsps.ts;
             args = [ "--stdio" ];
           };
           # typescript = {
@@ -74,7 +80,7 @@
           zig = {
             filetypes = [ "zig" ];
             roots = [ "build.zig" ];
-            command = "zls";
+            command = lsps.zig;
           };
         };
 
