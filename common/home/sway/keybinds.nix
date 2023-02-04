@@ -41,7 +41,10 @@ let
     fold
       (i: {
         "${meta + shift + i}" = "move container to workspace ${i}";
-      });
+      }) //
+    {
+      "${meta}Tab" = "workspace back_and_forth";
+    };
 
   # Movement stuff
   move =
