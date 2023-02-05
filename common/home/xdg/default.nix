@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./bash.nix
+    ./base
     ./dirs.nix
     ./mime
   ];
