@@ -10,8 +10,9 @@
 
   programs.fish = {
     enable = true;
-    functions = {
-      fish_prompt = builtins.readFile ./fish_prompt.fish;
+    functions = with builtins; {
+      fish_prompt = readFile ./fish_prompt.fish;
+      "cd.store" = readFile ./cd.store.fish;
     };
   };
 
@@ -23,7 +24,9 @@
   home.shellAliases = {
     pause = "systemctl suspend";
     rebuild = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/src/os.nix";
+
     fs = "nnn";
+
     e = "kak";
     q = "exit";
   };
