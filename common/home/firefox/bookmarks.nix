@@ -10,13 +10,5 @@
       name = "NixOS Search";
       url = "https://search.nixos.org/packages";
     }
-    {
-      name = "Spotify";
-      url = "https://open.spotify.com";
-    }
-    {
-      name = "Discord";
-      url = "https://discord.com/app";
-    }
   ];
 }]

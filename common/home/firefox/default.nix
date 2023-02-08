@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./apps.nix
     ./extensions.nix
     ./profile.nix
   ];
