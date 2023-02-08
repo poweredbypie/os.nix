@@ -13,6 +13,7 @@
     ./gtk.nix
     ./js.nix
     ./kak
+    ./latex.nix
     ./llvm.nix
     ./mako.nix
     ./man.nix

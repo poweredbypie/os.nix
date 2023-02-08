@@ -10,6 +10,7 @@
       toTOML = config: (pkgs.formats.toml { }).generate "${lsp}.toml" config;
       lsps = {
         cxx = "${pkgs.clang-tools_14}/bin/clangd";
+        tex = "${pkgs.texlab}/bin/texlab";
         nix = "${pkgs.rnix-lsp}/bin/rnix-lsp";
         ts = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
         html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
@@ -42,6 +43,11 @@
             roots = [ "package.json" ];
             command = lsps.html;
             args = [ "--stdio" ];
+          };
+          latex = {
+            filetypes = [ "latex" ];
+            roots = [ ".git" ".hg" ];
+            command = lsps.tex;
           };
           nix = {
             filetypes = [ "nix" ];
