@@ -8,5 +8,7 @@
     clang-tools_14
     # Newest LLDB is older?? What the hell
     lldb_13
+    # This is used everywhere
+    gnumake
   ];
 }
