@@ -1,9 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.firefox.profiles.pie = {
     isDefault = true;
     bookmarks = import ./bookmarks.nix;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      auto-tab-discard
+      ublock-origin
+    ];
     settings = {
       # Use Zathura instead
       "pdfjs.disabled" = true;
