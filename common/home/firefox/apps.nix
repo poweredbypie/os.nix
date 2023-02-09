@@ -9,6 +9,10 @@ in
   # TODO: Hack; If using the same profile, all other windows open in kiosk mode!
   programs.firefox.profiles."${profile}" = {
     id = 1;
+    settings = {
+      # Enable DRM for Spotify
+      "media.eme.enabled" = true;
+    };
   };
 
   home.packages = let

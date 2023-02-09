@@ -23,6 +23,8 @@
       "privacy.query_stripping.enabled.pbmode" = true;
       "privacy.trackingprotection.enabled" = true;
       "privacy.trackingprotection.socialtracking.enabled" = true;
+      # Disable DRM content
+      "media.eme.enabled" = false;
     };
   };
 }
