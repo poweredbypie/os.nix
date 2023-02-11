@@ -15,6 +15,7 @@
     ./kak
     ./latex.nix
     ./llvm.nix
+    ./locale.nix
     ./mako.nix
     ./man.nix
     ./osu.nix
