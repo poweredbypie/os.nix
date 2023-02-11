@@ -12,6 +12,9 @@ in
     settings = {
       # Enable DRM for Spotify
       "media.eme.enabled" = true;
+      # Disable mic indicator (it's a whole window which is annoying)
+      "privacy.webrtc.legacyGlobalIndicator" = false;
+      "privacy.webrtc.hideGlobalIndicator" = true;
     };
   };
 
