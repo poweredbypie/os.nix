@@ -5,9 +5,11 @@
     isDefault = true;
     bookmarks = import ./bookmarks.nix;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      adsum-notabs
       auto-tab-discard
       ublock-origin
     ];
+    userChrome = builtins.readFile ./custom.css;
     settings = {
       # Use Zathura instead
       "pdfjs.disabled" = true;
@@ -29,6 +31,10 @@
       "privacy.trackingprotection.socialtracking.enabled" = true;
       # Disable DRM content
       "media.eme.enabled" = false;
+      # Enable custom CSS
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      # Completely hide tab bar
+      "browser.tabs.tabmanager.enabled" = false;
     };
   };
 }
