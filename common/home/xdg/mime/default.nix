@@ -32,6 +32,7 @@
           "x-scheme-handler/http" = browse;
           "x-scheme-handler/https" = browse;
           "image/*" = browse;
+          "video/*" = browse;
           "text/*" = text;
           "application/json" = text;
           "application/pdf" = "org.pwmt.zathura.desktop";
