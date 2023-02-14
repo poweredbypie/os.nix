@@ -19,6 +19,7 @@
     ./mako.nix
     ./man.nix
     ./osu.nix
+    ./rust.nix
     ./nnn.nix
     ./sway
     ./xdg
