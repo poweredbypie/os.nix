@@ -16,22 +16,19 @@
 
   outputs = { self, nixpkgs, nur, home-manager, rust-overlay }:
     let
-      inherit (nixpkgs.lib) nixosSystem;
-      inherit (home-manager.nixosModules) home-manager;
-
       args = {
         misc = ./misc;
       };
 
       mkSystem = name: system:
-        nixosSystem {
+        nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./common
             ./sys/${name}
             # Set the hostname in the flake.
             { networking.hostName = name; }
-            home-manager
+            home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
