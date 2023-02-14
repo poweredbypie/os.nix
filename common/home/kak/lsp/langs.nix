@@ -16,6 +16,7 @@
         html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
         css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
         json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
+        rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         zig = "${pkgs.zls}/bin/zls";
       };
     in
@@ -83,6 +84,16 @@
           #     lint = true;
           #   };
           # };
+          rust = {
+            filetypes = [ "rust" ];
+            roots = [ "Cargo.toml" ];
+            command = lsps.rust;
+            settings_section = "rust-analyzer";
+            settings.rust-analyzer = {
+              # Apparently broken with kak-lsp
+              hoverActions.enable = false;
+            };
+          };
           zig = {
             filetypes = [ "zig" ];
             roots = [ "build.zig" ];

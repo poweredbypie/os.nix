@@ -8,7 +8,7 @@
       # Enables kak-lsp.
       {
         name = "WinSetOption";
-        option = "filetype=(javascript|typescript|html|css|json|c|cpp|nix|zig|latex)";
+        option = "filetype=(javascript|typescript|html|css|json|c|cpp|nix|rust|zig|latex)";
         commands = ''
           lsp-enable-window
           # Enables nicer diagnostics
