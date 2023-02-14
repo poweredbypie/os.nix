@@ -8,53 +8,58 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nur, home-manager, rust-overlay }:
-  let
-    inherit (nixpkgs.lib) nixosSystem;
-    inherit (home-manager.nixosModules) home-manager;
+    let
+      inherit (nixpkgs.lib) nixosSystem;
+      inherit (home-manager.nixosModules) home-manager;
 
-    args = {
-      misc = ./misc;
-    };
-
-    mkSystem = name: system:
-      nixosSystem {
-        inherit system;
-        modules = [
-          ./common
-          ./sys/${name}
-          # Set the hostname in the flake.
-          { networking.hostName = name; }
-          home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              users.pie = {
-                imports = [
-                  ./common/home
-                  ./sys/${name}/home
-                ];
-              };
-              extraSpecialArgs = args;
-            };
-            nixpkgs.overlays = [
-              nur.overlay
-              rust-overlay.overlays.default
-            ];
-          }
-        ];
-        specialArgs = args;
-      }
-  {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-    nixosConfigurations =
-      {
-        # Desktop
-        verthe = mkSystem "verthe" "x86-64-linux";
-        # Laptop
-        zen = mkSystem "zen" "x86-64-linux";
+      args = {
+        misc = ./misc;
       };
-  };
+
+      mkSystem = name: system:
+        nixosSystem {
+          inherit system;
+          modules = [
+            ./common
+            ./sys/${name}
+            # Set the hostname in the flake.
+            { networking.hostName = name; }
+            home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                users.pie = {
+                  imports = [
+                    ./common/home
+                    ./sys/${name}/home
+                  ];
+                };
+                extraSpecialArgs = args;
+              };
+              nixpkgs.overlays = [
+                nur.overlay
+                rust-overlay.overlays.default
+              ];
+            }
+          ];
+          specialArgs = args;
+        };
+    in
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      nixosConfigurations =
+        {
+          # Desktop
+          verthe = mkSystem "verthe" "x86-64-linux";
+          # Laptop
+          zen = mkSystem "zen" "x86-64-linux";
+        };
+    };
+}

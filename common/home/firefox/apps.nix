@@ -18,12 +18,13 @@ in
     };
   };
 
-  home.packages = let
-    inherit (pkgs) writeShellScriptBin;
-    mkApp = name: url: (writeShellScriptBin name "firefox -P ${profile} --kiosk --new-window ${url}");
-  in
-  [
-    (mkApp "discord" "https://discord.com/app")
-    (mkApp "spotify" "https://open.spotify.com")
-  ];
+  home.packages =
+    let
+      inherit (pkgs) writeShellScriptBin;
+      mkApp = name: url: (writeShellScriptBin name "firefox -P ${profile} --kiosk --new-window ${url}");
+    in
+    [
+      (mkApp "discord" "https://discord.com/app")
+      (mkApp "spotify" "https://open.spotify.com")
+    ];
 }
