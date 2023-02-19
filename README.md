@@ -2,7 +2,7 @@
 The source files that make up my NixOS setup(s)!
 
 # Pics
-![A picture of my setup. What else did you think this was.](misc/setup.png)
+![A picture of my setup. What else did you think this was.](pie/imgs/setup.png)
 
 # The stuff I use
 Most of this can also be found under my `setup` GitHub list.

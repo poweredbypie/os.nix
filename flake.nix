@@ -17,7 +17,7 @@
   outputs = { self, nixpkgs, nur, home-manager, rust-overlay }:
     let
       args = {
-        misc = ./misc;
+         pie = ./pie;
       };
 
       mkSystem = name: system:

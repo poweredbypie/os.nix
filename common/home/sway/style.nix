@@ -1,6 +1,6 @@
 # Font, colors, bar config, etc.
 
-{ misc, ... }:
+{ pie, ... }:
 
 let
   fonts = {
@@ -77,6 +77,6 @@ in
       };
     };
 
-    output."*".bg = "${misc}/yellowstone.jpg fill";
+    output."*".bg = "${pie}/imgs/yellowstone.jpg fill";
   };
 }

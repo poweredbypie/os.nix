@@ -1,6 +1,6 @@
 # Window manager / desktop environment of choice.
 
-{ pkgs, misc, ... }:
+{ pkgs, pie, ... }:
 
 {
   # Annoyingly, since this has some dependency on GL etc,
@@ -21,7 +21,7 @@
       let
         style = pkgs.writeText "greet.css" ''
           window {
-            background-image: url("${misc}/yellowstone.jpg");
+            background-image: url("${pie}/imgs/yellowstone.jpg");
             background-size: cover;
             background-position: center;
 
