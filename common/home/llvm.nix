@@ -3,11 +3,11 @@
 {
   # Annoyingly, the default tools are an older version.
   home.packages = with pkgs; [
-    clang_14
+    clang_15
     # Includes clangd
-    clang-tools_14
-    # Newest LLDB is older?? What the hell
-    lldb_13
+    clang-tools_15
+    # Debugger
+    lldb_15
     # This is used everywhere
     gnumake
   ];
