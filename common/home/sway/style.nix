@@ -1,6 +1,6 @@
 # Font, colors, bar config, etc.
 
-{ pie, ... }:
+{ pkgs, pie, ... }:
 
 let
   fonts = {
@@ -30,7 +30,7 @@ in
       inherit fonts;
 
       position = "top";
-      statusCommand = "while echo $(date +'%d.%m.%Y %H:%M:%S'); do sleep 1; done";
+      statusCommand = "while true; do ${pkgs.statxt}/bin/statxt; sleep 1; done";
 
       colors = {
         statusline = text;

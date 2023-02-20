@@ -43,6 +43,7 @@
               nixpkgs.overlays = [
                 nur.overlay
                 rust-overlay.overlays.default
+                (import ./pie/pkgs)
               ];
             }
           ];
