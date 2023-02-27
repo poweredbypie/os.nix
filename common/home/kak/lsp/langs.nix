@@ -17,6 +17,7 @@
         css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
         json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
         rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+        go = "${pkgs.gopls}/bin/gopls";
         zig = "${pkgs.zls}/bin/zls";
       };
     in
@@ -38,6 +39,11 @@
             roots = [ "package.json" ];
             command = lsps.css;
             args = [ "--stdio" ];
+          };
+          go = {
+            filetypes = [ "go" ];
+            roots = [ "go.mod" ".git" ".hg" ];
+            command = lsps.go;
           };
           html = {
             filetypes = [ "html" ];
