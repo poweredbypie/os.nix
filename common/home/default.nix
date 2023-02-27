@@ -10,6 +10,7 @@
     ./font.nix
     ./ghc.nix
     ./git.nix
+    ./go.nix
     ./gtk.nix
     ./js.nix
     ./kak

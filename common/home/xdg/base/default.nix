@@ -7,6 +7,7 @@
   imports = [
     ./bash.nix
     ./cargo.nix
+    ./go.nix
     ./nodejs.nix
   ];
 }
