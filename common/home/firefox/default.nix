@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -6,5 +6,8 @@
     ./profile.nix
   ];
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-beta-bin;
+  };
 }
