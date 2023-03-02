@@ -15,6 +15,7 @@
         ts = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
         html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
         css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
+        svelte = "${pkgs.nodePackages_latest.svelte-language-server}/bin/svelteserver";
         json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
         rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         go = "${pkgs.gopls}/bin/gopls";
@@ -60,6 +61,12 @@
             filetypes = [ "nix" ];
             roots = [ "flake.nix" "shell.nix" ".git" ".hg" ];
             command = lsps.nix;
+          };
+          svelte = {
+            filetypes = [ "svelte" ];
+            roots = [ "package.json" ];
+            command = lsps.svelte;
+            args = [ "--stdio" ];
           };
           javascript = {
             filetypes = [ "javascript" ];
