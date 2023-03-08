@@ -29,6 +29,9 @@
           hook -once -always window WinSetOption filetype=.* %{
             remove-hooks window semantic-tokens
           }
+
+          # Format on save
+          hook window BufWritePre .* lsp-formatting-sync
         '';
       }
       # Use tab for autocomplete
@@ -51,7 +54,7 @@
     ];
     # Load kak-lsp on startup.
     extraConfig = ''
-      eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+        eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       lsp-auto-hover-enable
     '';
   };
