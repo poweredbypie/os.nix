@@ -9,7 +9,7 @@
       lsp = "kak-lsp";
       toTOML = config: (pkgs.formats.toml { }).generate "${lsp}.toml" config;
       lsps = {
-        cxx = "${pkgs.clang-tools_14}/bin/clangd";
+        cxx = "${pkgs.clang-tools_15}/bin/clangd";
         tex = "${pkgs.texlab}/bin/texlab";
         nix = "${pkgs.rnix-lsp}/bin/rnix-lsp";
         ts = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
