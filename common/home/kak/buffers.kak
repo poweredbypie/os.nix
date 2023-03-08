@@ -1,6 +1,6 @@
 declare-user-mode buffers
 
-define-command buffers-select %{
+define-command buffers-select -docstring "buffers-select: show buffer select prompt" %{
     # Refresh
     unmap global buffers
     evaluate-commands %sh{
