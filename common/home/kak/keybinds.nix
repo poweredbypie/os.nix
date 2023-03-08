@@ -47,11 +47,19 @@
       key = "w";
       mode = "user";
       effect = ":write<ret>";
+      docstring = "write the current buffer";
     }
     {
       key = "q";
       mode = "user";
       effect = ":quit!<ret>";
+      docstring = "quit current client";
+    }
+    {
+      key = "d";
+      mode = "user";
+      effect = ":delete-buffer!<ret>";
+      docstring = "delete current buffer";
     }
   ];
 }
