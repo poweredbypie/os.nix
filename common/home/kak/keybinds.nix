@@ -61,5 +61,11 @@
       effect = ":delete-buffer!<ret>";
       docstring = "delete current buffer";
     }
+    {
+      key = "b";
+      mode = "user";
+      effect = ":buffers-select<ret>";
+      docstring = "go to buffer";
+    }
   ];
 }

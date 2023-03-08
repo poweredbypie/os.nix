@@ -1,5 +1,4 @@
 declare-user-mode buffers
-map global user b '<esc>: buffers-select<ret>'
 
 define-command buffers-select %{
     # Refresh
