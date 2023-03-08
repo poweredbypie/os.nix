@@ -7,5 +7,8 @@
     ./style.nix
   ];
 
-  programs.kakoune.enable = true;
+  programs.kakoune = {
+    enable = true;
+    extraConfig = builtins.readFile ./buffers.kak;
+  };
 }
