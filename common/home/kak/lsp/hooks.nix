@@ -16,8 +16,7 @@
           lsp-inlay-code-lenses-enable buffer
           lsp-inlay-hints-enable buffer
 
-          # Prefer spaces
-          set-option window lsp_insert_spaces true
+          set-option window lsp_insert_spaces false
           # Show info inline with cursor (looks nicer)
           set-option window lsp_hover_anchor true
 
