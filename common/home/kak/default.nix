@@ -9,6 +9,12 @@
 
   programs.kakoune = {
     enable = true;
-    extraConfig = builtins.readFile ./buffers.kak;
+    extraConfig =
+      let
+        inherit (builtins) map readFile concatStringsSep;
+        files = [ ./buffers.kak ./sv.kak ];
+        contents = map (f: readFile f) files;
+      in
+      concatStringsSep "\n" contents;
   };
 }

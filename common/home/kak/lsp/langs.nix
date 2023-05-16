@@ -19,6 +19,7 @@
         json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
         rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         go = "${pkgs.gopls}/bin/gopls";
+        sv = "${pkgs.verible}/bin/verible-verilog-ls";
         zig = "${pkgs.zls}/bin/zls";
       };
     in
@@ -106,6 +107,11 @@
               # Apparently broken with kak-lsp
               hoverActions.enable = false;
             };
+          };
+          sv = {
+            filetypes = [ "sv" ];
+            roots = [ ".git" ];
+            command = lsps.sv;
           };
           zig = {
             filetypes = [ "zig" ];

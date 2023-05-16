@@ -19,6 +19,7 @@
         relative = true;
         enable = true;
       };
+      showMatching = true;
       showWhitespace.enable = true;
       scrollOff.lines = 5;
       ui = {
