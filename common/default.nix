@@ -3,6 +3,7 @@
 {
   imports = [
     ./doas.nix
+    ./docker.nix
     ./env.nix
     ./font.nix
     ./locale.nix
