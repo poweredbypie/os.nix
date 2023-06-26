@@ -23,6 +23,7 @@
     ./rust.nix
     ./nnn.nix
     ./sway
+    ./tla.nix
     ./vifm.nix
     ./xdg
     ./zathura.nix
