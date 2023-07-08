@@ -23,23 +23,19 @@ let
   # Folds a list of sets into a single set.
   # Not sure if this is the best way of doing it...
   concat = (left: right: left // right);
-  foldList = list: func:
+  fold = list: func:
     foldl' concat { } (map (i: func i) list);
 
   # Workspace stuff
   spaces =
     let
       nums = map (i: toString i) (lib.lists.range 0 9);
-      fold = func: foldList nums func;
     in
-    # Change to workspace i.
-    fold
+    fold nums
       (i: {
+        # Change to workspace i.
         "${meta + i}" = "workspace ${i}";
-      }) //
-    # Move focused window to workspace i.
-    fold
-      (i: {
+        # Move focused window to workspace i.
         "${meta + shift + i}" = "move container to workspace ${i}";
       }) //
     {
@@ -49,19 +45,19 @@ let
   # Movement stuff
   move =
     let
-      inherit (lib.strings) toLower;
-      keys = [ "Left" "Right" "Up" "Down" ];
-      fold = func: foldList keys func;
+      keys = [
+        { key = "h"; action = "left"; }
+        { key = "j"; action = "down"; }
+        { key = "k"; action = "up"; }
+        { key = "l"; action = "right"; }
+      ];
     in
-    # Change focus
-    fold
-      (key: {
-        "${meta + key}" = "focus ${toLower key}";
-      }) //
-    # Move focused window
-    fold
-      (key: {
-        "${meta + alt + key}" = "move ${toLower key}";
+    fold keys
+      ({ key, action }: {
+        # Change focus
+        "${meta + key}" = "focus ${action}";
+        # Move focused window
+        "${meta + alt + key}" = "move ${action}";
       });
 in
 {
