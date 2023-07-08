@@ -3,13 +3,6 @@
 { lib, ... }:
 
 let
-  term = "alacritty";
-  browse = "firefox";
-  run = "bemenu-run -b | xargs swaymsg exec --";
-  # TODO: Annoyingly, I have Alacritty launch the shell,
-  # and have the shell launch nnn. Otherwise nnn can't open
-  # kakoune to edit text files. I wonder why...
-  fs = "${term} -e fish -c nnn";
   snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
   sound = cmd: val: "exec wpctl set-${cmd} @DEFAULT_SINK@ ${val}";
 
@@ -18,18 +11,66 @@ let
   shift = "Shift+";
   alt = "Alt+";
 
-  # Helper stuff
-  inherit (builtins) foldl' map;
   # Folds a list of sets into a single set.
   # Not sure if this is the best way of doing it...
   concat = (left: right: left // right);
   fold = list: func:
-    foldl' concat { } (map (i: func i) list);
+    builtins.foldl' concat { } (map (i: func i) list);
+  # Converts an attribute set to a list of attribute sets,
+  # with the key and value specified by the caller.
+  attrsToKVs = key: val: attrs:
+    map
+      (attr: {
+        "${key}" = attr;
+        "${val}" = (builtins.getAttr attr attrs);
+      })
+      (builtins.attrNames attrs);
+
+  # Launch apps
+  launch =
+    let
+      apps = rec {
+        # "Terminal"
+        t = "alacritty";
+        # "Browser"
+        b = "firefox";
+        # "Run"
+        r = "bemenu-run -b | xargs swaymsg exec --";
+        # TODO: Annoyingly, I have Alacritty launch the shell,
+        # and have the shell launch nnn. Otherwise nnn can't open
+        # kakoune to edit text files. I wonder why...
+        # "Filesystem"
+        f = "${t} -e fish -c nnn";
+      };
+    in
+    fold (attrsToKVs "app" "cmd" apps)
+      ({ app, cmd }: {
+        # Launch the app
+        "${meta + app}" = "exec ${cmd}";
+      });
+
+  # Movement stuff
+  move =
+    let
+      keys = {
+        h = "left";
+        j = "down";
+        k = "up";
+        l = "right";
+      };
+    in
+    fold (attrsToKVs "key" "action" keys)
+      ({ key, action }: {
+        # Change focus
+        "${meta + key}" = "focus ${action}";
+        # Move focused window
+        "${meta + alt + key}" = "move ${action}";
+      });
 
   # Workspace stuff
   spaces =
     let
-      nums = map (i: toString i) (lib.lists.range 0 9);
+      nums = builtins.genList (i: toString i) 10;
     in
     fold nums
       (i: {
@@ -41,24 +82,6 @@ let
     {
       "${meta}Tab" = "workspace back_and_forth";
     };
-
-  # Movement stuff
-  move =
-    let
-      keys = [
-        { key = "h"; action = "left"; }
-        { key = "j"; action = "down"; }
-        { key = "k"; action = "up"; }
-        { key = "l"; action = "right"; }
-      ];
-    in
-    fold keys
-      ({ key, action }: {
-        # Change focus
-        "${meta + key}" = "focus ${action}";
-        # Move focused window
-        "${meta + alt + key}" = "move ${action}";
-      });
 in
 {
   wayland.windowManager.sway.config = {
@@ -66,10 +89,6 @@ in
     modes = { };
     keybindings = {
       # Programs
-      "${meta}t" = "exec ${term}";
-      "${meta}b" = "exec ${browse}";
-      "${meta}r" = "exec ${run}";
-      "${meta}f" = "exec ${fs}";
 
       # Screenshot utils
       "Print" = snap "";
@@ -87,6 +106,6 @@ in
       # Close stuff
       "${meta}x" = "kill";
       "${ctrl + alt}Delete" = "exec swaymsg exit";
-    } // move // spaces;
+    } // launch // move // spaces;
   };
 }
