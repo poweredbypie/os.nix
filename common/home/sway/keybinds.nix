@@ -11,20 +11,10 @@ let
   shift = "Shift+";
   alt = "Alt+";
 
-  # Folds a list of sets into a single set.
-  # Not sure if this is the best way of doing it...
-  concat = (left: right: left // right);
-  fold = list: func:
-    builtins.foldl' concat { } (map (i: func i) list);
-  # Converts an attribute set to a list of attribute sets,
-  # with the key and value specified by the caller.
-  attrsToKVs = key: val: attrs:
-    map
-      (attr: {
-        "${key}" = attr;
-        "${val}" = (builtins.getAttr attr attrs);
-      })
-      (builtins.attrNames attrs);
+  # Import helpers
+  mkPair = lib.attrsets.nameValuePair;
+  inherit (lib.attrsets) mapAttrs';
+  inherit (builtins) genList listToAttrs;
 
   # Launch apps
   launch =
@@ -42,12 +32,10 @@ let
         # "Filesystem"
         f = "${t} -e fish -c nnn";
       };
+      # Run the specified command.
+      run = (app: cmd: mkPair "${meta + app}" "exec ${cmd}");
     in
-    fold (attrsToKVs "app" "cmd" apps)
-      ({ app, cmd }: {
-        # Launch the app
-        "${meta + app}" = "exec ${cmd}";
-      });
+    mapAttrs' run apps;
 
   # Movement stuff
   move =
@@ -58,30 +46,23 @@ let
         k = "up";
         l = "right";
       };
+      # Change focus
+      change = (key: action: mkPair "${meta + key}" "focus ${action}");
+      # Move focused window
+      move = (key: action: mkPair "${meta + alt + key}" "move ${action}");
     in
-    fold (attrsToKVs "key" "action" keys)
-      ({ key, action }: {
-        # Change focus
-        "${meta + key}" = "focus ${action}";
-        # Move focused window
-        "${meta + alt + key}" = "move ${action}";
-      });
+    mapAttrs' change keys // mapAttrs' move keys;
 
   # Workspace stuff
   spaces =
     let
-      nums = builtins.genList (i: toString i) 10;
+      nums = genList (i: toString i) 10;
+      # Change to workspace i.
+      change = (i: mkPair "${meta + i}" "workspace ${i}");
+      # Move focused window to workspace i.
+      move = (i: mkPair "${meta + shift + i}" "move container to workspace ${i}");
     in
-    fold nums
-      (i: {
-        # Change to workspace i.
-        "${meta + i}" = "workspace ${i}";
-        # Move focused window to workspace i.
-        "${meta + shift + i}" = "move container to workspace ${i}";
-      }) //
-    {
-      "${meta}Tab" = "workspace back_and_forth";
-    };
+    listToAttrs (map change nums ++ map move nums);
 in
 {
   wayland.windowManager.sway.config = {
@@ -102,7 +83,8 @@ in
       # Change layout
       "${meta}Return" = "layout toggle split tabbed";
       "${meta}Space" = "fullscreen";
-
+      # Move back and forth between workspaces
+      "${meta}Tab" = "workspace back_and_forth";
       # Close stuff
       "${meta}x" = "kill";
       "${ctrl + alt}Delete" = "exec swaymsg exit";
