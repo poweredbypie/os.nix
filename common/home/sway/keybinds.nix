@@ -33,7 +33,7 @@ let
         f = "${t} -e fish -c nnn";
       };
       # Run the specified command.
-      run = (app: cmd: mkPair "${meta + app}" "exec ${cmd}");
+      run = (app: cmd: mkPair (meta + app) "exec ${cmd}");
     in
     mapAttrs' run apps;
 
@@ -47,9 +47,9 @@ let
         l = "right";
       };
       # Change focus
-      change = (key: action: mkPair "${meta + key}" "focus ${action}");
+      change = (key: action: mkPair (meta + key) "focus ${action}");
       # Move focused window
-      move = (key: action: mkPair "${meta + alt + key}" "move ${action}");
+      move = (key: action: mkPair (meta + alt + key) "move ${action}");
     in
     mapAttrs' change keys // mapAttrs' move keys;
 
@@ -58,9 +58,9 @@ let
     let
       nums = genList (i: toString i) 10;
       # Change to workspace i.
-      change = (i: mkPair "${meta + i}" "workspace ${i}");
+      change = (i: mkPair (meta + i) "workspace ${i}");
       # Move focused window to workspace i.
-      move = (i: mkPair "${meta + shift + i}" "move container to workspace ${i}");
+      move = (i: mkPair (meta + shift + i) "move container to workspace ${i}");
     in
     listToAttrs (map change nums ++ map move nums);
 in
@@ -69,8 +69,6 @@ in
     # Disable resize mode
     modes = { };
     keybindings = {
-      # Programs
-
       # Screenshot utils
       "Print" = snap "";
       "Shift+Print" = snap "-o";
