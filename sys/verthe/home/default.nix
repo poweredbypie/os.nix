@@ -1,5 +1,7 @@
 { ... }:
 
 {
-  # There's nothing here yet!
+  imports = [
+    ./sway.nix
+  ];
 }
