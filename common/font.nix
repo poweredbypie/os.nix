@@ -4,7 +4,7 @@
   # Move this to home manager later on...
   # https://github.com/nix-community/home-manager/pull/1268
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       ibm-plex
     ];
     fontconfig = {

@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, zig }:
+{ stdenv, lib, fetchFromGitHub, zig_0_10 }:
 
 stdenv.mkDerivation rec {
   pname = "statxt";
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-Ymi2xZxLcyIZObuZpr55C0NRxo27UGxN1j5NLiWwRs0=";
   };
 
-  nativeBuildInputs = [ zig ];
+  nativeBuildInputs = [ zig_0_10 ];
 
   dontConfigure = true;
 

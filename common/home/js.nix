@@ -5,6 +5,6 @@
 {
   home.packages = with pkgs; [
     deno
-    nodejs-19_x
+    nodejs-slim_20
   ];
 }
