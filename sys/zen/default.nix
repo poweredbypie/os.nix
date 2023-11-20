@@ -8,5 +8,6 @@
     ./hardware-configuration.nix
     ./power.nix
     ./print.nix
+    ./tablet.nix
   ];
 }
