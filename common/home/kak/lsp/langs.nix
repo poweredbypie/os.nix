@@ -1,6 +1,6 @@
 # LSP servers and LSP client setup.
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # TODO: This is so silly hacky please make an overlay to make this better lol
@@ -8,20 +8,29 @@
     let
       lsp = "kak-lsp";
       toTOML = config: (pkgs.formats.toml { }).generate "${lsp}.toml" config;
-      lsps = {
-        cxx = "${pkgs.clang-tools_15}/bin/clangd";
-        tex = "${pkgs.texlab}/bin/texlab";
-        nix = "${pkgs.rnix-lsp}/bin/rnix-lsp";
-        ts = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
-        html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
+      lsps = rec {
+        c_cpp = "${pkgs.clang-tools_15}/bin/clangd";
         css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
-        svelte = "${pkgs.nodePackages_latest.svelte-language-server}/bin/svelteserver";
-        json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
-        rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         go = "${pkgs.gopls}/bin/gopls";
+        html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
+        javascript = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
+        json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
+        nix = "${pkgs.rnix-lsp}/bin/rnix-lsp";
+        rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+        svelte = "${pkgs.nodePackages_latest.svelte-language-server}/bin/svelteserver";
         sv = "${pkgs.verible}/bin/verible-verilog-ls";
+        latex = "${pkgs.texlab}/bin/texlab";
+        typescript = javascript;
         zig = "${pkgs.zls}/bin/zls";
       };
+
+      mkLangs = langs: lib.attrsets.mapAttrs
+        (name: value: {
+          # This is basically only here for c_cpp
+          filetypes = lib.strings.splitString "_" name;
+          command = lsps."${name}";
+        } // value)
+        langs;
     in
     {
       "${lsp}/${lsp}.toml".source = toTOML {
@@ -29,97 +38,57 @@
         verbosity = 2;
         # From stock: "exit session if no requests were received during given period in seconds"
         server.timeout = 1800;
-
-        language = {
-          c_cpp = {
-            filetypes = [ "c" "cpp" ];
-            roots = [ "compile_commands.json" ".clangd" ".git" ".hg" ];
-            command = lsps.cxx;
-          };
-          css = {
-            filetypes = [ "css" ];
-            roots = [ "package.json" ];
-            command = lsps.css;
-            args = [ "--stdio" ];
-          };
-          go = {
-            filetypes = [ "go" ];
-            roots = [ "go.mod" ".git" ".hg" ];
-            command = lsps.go;
-          };
-          html = {
-            filetypes = [ "html" ];
-            roots = [ "package.json" ];
-            command = lsps.html;
-            args = [ "--stdio" ];
-          };
-          latex = {
-            filetypes = [ "latex" ];
-            roots = [ ".git" ".hg" ];
-            command = lsps.tex;
-          };
-          nix = {
-            filetypes = [ "nix" ];
-            roots = [ "flake.nix" "shell.nix" ".git" ".hg" ];
-            command = lsps.nix;
-          };
-          svelte = {
-            filetypes = [ "svelte" ];
-            roots = [ "package.json" ];
-            command = lsps.svelte;
-            args = [ "--stdio" ];
-          };
-          javascript = {
-            filetypes = [ "javascript" ];
-            roots = [ "package.json" ];
-            command = lsps.ts;
-            args = [ "--stdio" ];
-          };
-          json = {
-            filetypes = [ "json" ];
-            roots = [ "package.json" ];
-            command = lsps.json;
-            args = [ "--stdio" ];
-          };
-          typescript = {
-            filetypes = [ "typescript" ];
-            roots = [ "package.json" ];
-            command = lsps.ts;
-            args = [ "--stdio" ];
-          };
-          # typescript = {
-          #   filetypes = [ "typescript" ];
-          #   roots = [ "deno.json" ".git" ".hg" ];
-          #   command = "deno";
-          #   args = [ "lsp" ];
-
-          #   settings.deno = {
-          #     enable = true;
-          #     lint = true;
-          #   };
-          # };
-          rust = {
-            filetypes = [ "rust" ];
-            roots = [ "Cargo.toml" ];
-            command = lsps.rust;
-            settings_section = "rust-analyzer";
-            settings.rust-analyzer = {
-              # Apparently broken with kak-lsp
-              hoverActions.enable = false;
+        language =
+          let
+            scm = [ ".git" ".hg" ];
+            node = {
+              roots = [ "package.json" ];
+              args = [ "--stdio" ];
             };
-          };
-          sv = {
-            filetypes = [ "sv" ];
-            roots = [ ".git" ];
-            command = lsps.sv;
-          };
-          zig = {
-            filetypes = [ "zig" ];
-            roots = [ "build.zig" ];
-            command = lsps.zig;
-          };
-        };
-
+          in
+          mkLangs
+            {
+              c_cpp = {
+                roots = [ "compile_commands.json" ".clangd" ] ++ scm;
+              };
+              css = node;
+              go = {
+                roots = [ "go.mod" ] ++ scm;
+              };
+              html = node;
+              latex = {
+                roots = scm;
+              };
+              nix = {
+                roots = [ "flake.nix" "shell.nix" ] ++ scm;
+              };
+              svelte = node;
+              javascript = node;
+              json = node;
+              typescript = node;
+              # typescript = {
+              #   roots = [ "deno.json" ] ++ scm;
+              #   args = [ "lsp" ];
+              #   settings.deno = {
+              #     enable = true;
+              #     line = true;
+              #   };
+              # };
+              rust = {
+                roots = [ "Cargo.toml" ];
+                settings_section = "rust-analyzer";
+                settings.rust-analyzer = {
+                  # Apparently broken with kak-lsp
+                  hoverActions.enable = false;
+                };
+              };
+              sv = {
+                roots = scm;
+              };
+              zig = {
+                roots = [ "build.zig" ];
+              };
+            };
         # This is from the stock kak-lsp.toml.
         # I'm just not gonna touch it.
         semantic_tokens.faces = [
