@@ -8,10 +8,10 @@
     ./firefox
     ./fish
     ./font.nix
-    ./ghc.nix
     ./git.nix
     ./go.nix
     ./gtk.nix
+    ./hs.nix
     ./js.nix
     ./kak
     ./latex.nix

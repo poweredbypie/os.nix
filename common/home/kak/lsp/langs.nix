@@ -12,6 +12,7 @@
         c_cpp = "${pkgs.clang-tools_15}/bin/clangd";
         css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
         go = "${pkgs.gopls}/bin/gopls";
+        haskell = "${pkgs.haskell-language-server}/bin/haskell-language-server-wrapper";
         html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
         javascript = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
         json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
@@ -54,6 +55,10 @@
               css = node;
               go = {
                 roots = [ "go.mod" ] ++ scm;
+              };
+              haskell = {
+                roots = [ "Setup.hs" "stack.yaml" "*.cabal" ];
+                args = [ "--lsp" ];
               };
               html = node;
               latex = {
