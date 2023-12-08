@@ -3,9 +3,13 @@
 { lib, ... }:
 
 let
+  wobSock = "/tmp/wob.sock";
+
   snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
-  sound = cmd: val: "exec wpctl set-${cmd} @DEFAULT_SINK@ ${val}";
-  bright = val: "exec brightnessctl --class=backlight set ${val}";
+  # TODO: No mute handling. Also should split this up
+  sound = cmd: val: "exec wpctl set-${cmd} @DEFAULT_SINK@ ${val} && wpctl get-volume @DEFAULT_SINK@ | sed 's/[^0-9]//g' > ${wobSock}";
+  # TODO: Should split this up
+  bright = cmd: val: "exec brightnessctl -c backlight set ${val} && brightnessctl -c backlight get > ${wobSock}";
 
   meta = "Mod4+";
   ctrl = "Ctrl+";
@@ -67,6 +71,13 @@ let
 in
 {
   wayland.windowManager.sway.config = {
+    startup = [
+      # Make a FIFO for wob
+      {
+        command = "rm -f ${wobSock} && mkfifo ${wobSock} && tail -f ${wobSock} | wob";
+        always = true;
+      }
+    ];
     # Disable resize mode
     modes = { };
     keybindings = {
@@ -80,8 +91,8 @@ in
       "XF86AudioMute" = sound "mute" "toggle";
 
       # Brightness
-      "XF86MonBrightnessUp" = bright "10%+";
-      "XF86MonBrightnessDown" = bright "10%-";
+      "XF86MonBrightnessUp" = bright "set" "10%+";
+      "XF86MonBrightnessDown" = bright "set" "10%-";
 
       # Change layout
       "${meta}Return" = "layout toggle split tabbed";

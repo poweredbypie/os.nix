@@ -4,6 +4,8 @@
   home.packages = with pkgs; [
     # App launcher
     bemenu
+    # Status bar for brightness / volume
+    wob
     # Screenshot util
     grim
     slurp
