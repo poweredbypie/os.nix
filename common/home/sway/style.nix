@@ -14,6 +14,7 @@ let
   darkest = "#000000";
 in
 {
+  # TODO: Split this out
   xdg.configFile."wob/wob.ini".text = lib.generators.toINIWithGlobalSection { } {
     globalSection = {
       border_offset = 0;
