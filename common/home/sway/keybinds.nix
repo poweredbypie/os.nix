@@ -5,6 +5,7 @@
 let
   snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
   sound = cmd: val: "exec wpctl set-${cmd} @DEFAULT_SINK@ ${val}";
+  bright = val: "exec brightnessctl --class=backlight set ${val}";
 
   meta = "Mod4+";
   ctrl = "Ctrl+";
@@ -77,6 +78,10 @@ in
       "XF86AudioLowerVolume" = sound "volume" "0.1-";
       "XF86AudioRaiseVolume" = sound "volume" "0.1+";
       "XF86AudioMute" = sound "mute" "toggle";
+
+      # Brightness
+      "XF86MonBrightnessUp" = bright "10%+";
+      "XF86MonBrightnessDown" = bright "10%-";
 
       # Change layout
       "${meta}Return" = "layout toggle split tabbed";

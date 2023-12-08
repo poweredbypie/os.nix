@@ -7,6 +7,8 @@
     # Screenshot util
     grim
     slurp
+    # Brightness
+    brightnessctl
     # Allow access to clipboard from scripts
     wl-clipboard
   ];
