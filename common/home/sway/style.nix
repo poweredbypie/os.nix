@@ -1,6 +1,6 @@
 # Font, colors, bar config, etc.
 
-{ pkgs, pie, ... }:
+{ pkgs, pie, lib, ... }:
 
 let
   fonts = {
@@ -14,6 +14,19 @@ let
   darkest = "#000000";
 in
 {
+  xdg.configFile."wob/wob.ini".text = lib.generators.toINIWithGlobalSection { } {
+    globalSection = {
+      border_offset = 0;
+      border_size = 0;
+      width = 300;
+      height = 15;
+      anchor = "bottom left";
+      margin = 15;
+      # TODO: Merge with sway settings
+      bar_color = "d19936";
+      bar_padding = 3;
+    };
+  };
   wayland.windowManager.sway.config = {
     # Default environment behavior stuff
     workspaceLayout = "default";
