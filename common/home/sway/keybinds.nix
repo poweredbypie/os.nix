@@ -1,15 +1,28 @@
 # Preferred keybinds.
 
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 let
   wobSock = "/tmp/wob.sock";
 
   snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
-  # TODO: No mute handling. Also should split this up
-  sound = cmd: val: "exec wpctl set-${cmd} @DEFAULT_SINK@ ${val} && wpctl get-volume @DEFAULT_SINK@ | sed 's/[^0-9]//g' > ${wobSock}";
-  # TODO: Should split this up
-  bright = cmd: val: "exec brightnessctl -c backlight set ${val} && brightnessctl -c backlight get > ${wobSock}";
+  # TODO: This is kind of hard to read and a little cursed
+  sound = cmd: val:
+    "exec ${pkgs.writeShellScript "sound-${cmd}-${val}" ''
+      wpctl set-${cmd} @DEFAULT_SINK@ ${val}
+      if [ ${cmd} = 'mute' ] && $(wpctl get-volume @DEFAULT_SINK@ | grep -q 'MUTED'); then
+        echo '0' > ${wobSock}
+      else
+        wpctl get-volume @DEFAULT_SINK@ | sed 's/[^0-9]//g' > ${wobSock}
+      fi
+    ''}";
+  bright = val:
+    "exec ${pkgs.writeShellScript "bright-${val}" ''
+      brightnessctl --class=backlight set ${val}
+      current=$(brightnessctl --class=backlight get)
+      max=$(brightnessctl --class=backlight max)
+      echo $((current * 100 / max)) > ${wobSock}
+    ''}";
 
   meta = "Mod4+";
   ctrl = "Ctrl+";
@@ -89,11 +102,9 @@ in
       "XF86AudioLowerVolume" = sound "volume" "0.1-";
       "XF86AudioRaiseVolume" = sound "volume" "0.1+";
       "XF86AudioMute" = sound "mute" "toggle";
-
       # Brightness
-      "XF86MonBrightnessUp" = bright "set" "10%+";
-      "XF86MonBrightnessDown" = bright "set" "10%-";
-
+      "XF86MonBrightnessUp" = bright "10%+";
+      "XF86MonBrightnessDown" = bright "10%-";
       # Change layout
       "${meta}Return" = "layout toggle split tabbed";
       "${meta}Space" = "fullscreen";
