@@ -21,7 +21,8 @@
         svelte = "${pkgs.nodePackages_latest.svelte-language-server}/bin/svelteserver";
         sv = "${pkgs.verible}/bin/verible-verilog-ls";
         latex = "${pkgs.texlab}/bin/texlab";
-        typescript = javascript;
+        # typescript = javascript;
+        typescript = "${pkgs.deno}/bin/deno";
         zig = "${pkgs.zls}/bin/zls";
       };
 
@@ -70,15 +71,15 @@
               svelte = node;
               javascript = node;
               json = node;
-              typescript = node;
-              # typescript = {
-              #   roots = [ "deno.json" ] ++ scm;
-              #   args = [ "lsp" ];
-              #   settings.deno = {
-              #     enable = true;
-              #     line = true;
-              #   };
-              # };
+              # typescript = node;
+              typescript = {
+                roots = [ "deno.json" ] ++ scm;
+                args = [ "lsp" ];
+                settings.deno = {
+                  enable = true;
+                  line = true;
+                };
+              };
               rust = {
                 roots = [ "Cargo.toml" ];
                 settings_section = "rust-analyzer";
