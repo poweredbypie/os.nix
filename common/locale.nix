@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   suffix = ".UTF-8/UTF-8";
@@ -10,4 +10,38 @@ in
   i18n.supportedLocales = [ us au ];
   i18n.defaultLocale = us;
   console.keyMap = "us";
+
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5 = {
+      addons = with pkgs; [
+        fcitx5-chinese-addons
+        fcitx5-gtk
+      ];
+      ignoreUserConfig = true;
+      settings = {
+        inputMethod = {
+          # Thanks https://github.com/leana8959!
+          "Groups/0" = {
+            Name = "default";
+            "Default Layout" = "us";
+            DefaultIM = "pinyin";
+          };
+          "Groups/0/Items/0" = {
+            Name = "pinyin";
+            Layout = "";
+          };
+          GroupOrder = {
+            "0" = "default";
+          };
+        };
+        globalOptions = {
+          Hotkey.EnumerateWithTriggerKeys = true;
+          "Hotkey/TriggerKeys" = {
+            "0" = "Control+space";
+          };
+        };
+      };
+    };
+  };
 }
