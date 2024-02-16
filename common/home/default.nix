@@ -12,6 +12,7 @@
     ./go.nix
     ./gtk.nix
     ./hs.nix
+    ./iwgtk.nix
     ./js.nix
     ./kak
     ./latex.nix
