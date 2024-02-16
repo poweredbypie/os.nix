@@ -1,5 +1,5 @@
 # GTK theming
-{ config, ... }:
+{ pkgs, config, ... }:
 
 let
   dark = {
@@ -12,5 +12,9 @@ in
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
     gtk3 = dark;
     gtk4 = dark;
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
   };
 }
