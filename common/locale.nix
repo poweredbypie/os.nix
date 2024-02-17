@@ -16,6 +16,7 @@ in
     fcitx5 = {
       addons = with pkgs; [
         fcitx5-chinese-addons
+        # TODO: Same as iwgtk, XDG autostart seems to be a bit inconsistent
         fcitx5-gtk
       ];
       ignoreUserConfig = true;
