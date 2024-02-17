@@ -28,6 +28,14 @@ in
       bar_padding = 3;
     };
   };
+  # Cursor (macOS)
+  home.pointerCursor = {
+    package = pkgs.apple-cursor;
+    name = "macOS-Monterey-White";
+    # TODO: I don't know why but in GTK apps this is SLIGHTLY smaller than outside. WHY???
+    size = 16;
+    gtk.enable = true;
+  };
   wayland.windowManager.sway.config = {
     # Default environment behavior stuff
     workspaceLayout = "default";
