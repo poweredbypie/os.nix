@@ -15,12 +15,12 @@
         blink_interval = 500;
         blink_timeout = 0;
       };
-      key_bindings = [
+      keyboard.bindings = [
         # Bind Ctrl+Backspace to Ctrl+W (VSCode habit)
         {
           key = "Back";
           mods = "Control";
-          chars = "\\x17";
+          chars = "\\u0017";
         }
         # Bind search to Ctrl+F
         {
