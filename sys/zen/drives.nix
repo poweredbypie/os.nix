@@ -25,6 +25,10 @@
           "nofail"
         ];
       };
+      "/home/pie/sd" = {
+        label = "ptsd";
+        options = perms ++ [ "nofail" ];
+      };
     };
 
   swapDevices = [{
