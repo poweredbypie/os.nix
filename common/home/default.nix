@@ -8,6 +8,7 @@
     ./firefox
     ./fish
     ./font.nix
+    ./gba.nix
     ./git.nix
     ./go.nix
     ./gtk.nix
