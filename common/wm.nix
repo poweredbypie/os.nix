@@ -7,7 +7,7 @@
   # this has to be set here instead of in the home manager config.
   programs.sway.enable = true;
   # I don't use anything that doesn't natively support wayland
-  programs.xwayland.enable = false;
+  # programs.xwayland.enable = false;
 
   xdg.portal = {
     enable = true;

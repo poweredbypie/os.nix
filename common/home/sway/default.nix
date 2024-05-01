@@ -25,7 +25,7 @@
     enable = true;
     # Use nixpkgs for the actual sway package.
     package = null;
-    xwayland = false;
+    # xwayland = false;
     systemd = {
       enable = true;
       xdgAutostart = true;
