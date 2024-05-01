@@ -23,6 +23,7 @@
     ./man.nix
     ./osu.nix
     ./rust.nix
+    ./rnote.nix
     ./nnn.nix
     ./sway
     ./tla.nix
