@@ -1,7 +1,9 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.mgba
+  home.packages = with pkgs; [
+    (retroarch.override {
+      cores = [ libretro.vba-next ];
+    })
   ];
 }
