@@ -28,6 +28,7 @@
     ./sway
     ./tla.nix
     ./vifm.nix
+    ./wine.nix
     ./xdg
     ./zathura.nix
     ./zig.nix
