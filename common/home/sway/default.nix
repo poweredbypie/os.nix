@@ -17,6 +17,7 @@
 
   imports = [
     ./input.nix
+    ./lock.nix
     ./keybinds.nix
     ./style.nix
   ];
