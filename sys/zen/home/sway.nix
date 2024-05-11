@@ -11,8 +11,8 @@
     {
       output = {
         "*".res = "1920x1080@60Hz";
-        "${top}".pos = "0 0";
-        "${bot}".pos = "0 1080";
+        # "${top}".pos = "0 0";
+        # "${bot}".pos = "0 1080";
       };
       workspaceOutputAssign = [
         {

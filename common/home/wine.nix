@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.wine64
+    pkgs.wine
   ];
 }
