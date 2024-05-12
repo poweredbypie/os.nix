@@ -11,6 +11,7 @@
     ./nix.nix
     ./sound.nix
     ./users.nix
+    ./virt.nix
     ./wm.nix
   ];
 }
