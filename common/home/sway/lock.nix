@@ -32,4 +32,19 @@
       }
     ];
   };
+
+  wayland.windowManager.sway.config.window.commands = [
+    {
+      criteria = {
+        class = ".*";
+      };
+      command = "inhibit_idle fullscreen";
+    }
+    {
+      criteria = {
+        app_id = ".*";
+      };
+      command = "inhibit_idle fullscreen";
+    }
+  ];
 }
