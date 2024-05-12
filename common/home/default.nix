@@ -5,6 +5,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./discord.nix
     ./firefox
     ./fish
     ./font.nix

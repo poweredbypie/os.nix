@@ -24,7 +24,8 @@ in
       mkApp = name: url: (writeShellScriptBin name "firefox -P ${profile} --kiosk --new-window ${url}");
     in
     [
-      (mkApp "discord" "https://discord.com/app")
+      # (mkApp "discord" "https://discord.com/app")
       (mkApp "spotify" "https://open.spotify.com")
+      (mkApp "netflix" "https://www.netflix.com")
     ];
 }
