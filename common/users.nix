@@ -8,7 +8,7 @@
   users.users.pie = {
     createHome = true;
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable doas
+    extraGroups = [ "wheel" "libvirtd" ]; # doas, libvirtd access
     shell = pkgs.fish;
   };
 }
