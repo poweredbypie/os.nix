@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   home.language =
@@ -12,4 +12,13 @@
       measurement = au;
       time = au;
     };
+
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-chinese-addons
+      # TODO: Same as iwgtk, XDG autostart seems to be a bit inconsistent
+      fcitx5-gtk
+    ];
+  };
 }
