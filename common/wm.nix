@@ -51,6 +51,7 @@
           }
         '';
 
+        # TODO: Let the login manager hibernate when idle
         config = pkgs.writeText "greet.sway" ''
           # Fix XDG portal issue
           exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
