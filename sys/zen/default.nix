@@ -3,6 +3,7 @@
 {
   imports = [
     ./boot.nix
+    ./bluetooth.nix
     ./ccache.nix
     ./drives.nix
     ./hardware-configuration.nix
