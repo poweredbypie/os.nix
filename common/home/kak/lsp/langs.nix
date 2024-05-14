@@ -8,7 +8,7 @@
     let
       lsp = "kak-lsp";
       toTOML = config: (pkgs.formats.toml { }).generate "${lsp}.toml" config;
-      lsps = rec {
+      lsps = {
         c_cpp = "${pkgs.clang-tools_15}/bin/clangd";
         css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
         go = "${pkgs.gopls}/bin/gopls";

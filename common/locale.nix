@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 let
   suffix = ".UTF-8/UTF-8";

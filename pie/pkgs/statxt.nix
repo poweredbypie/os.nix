@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, zig_0_10 }:
+{ stdenv, fetchFromGitHub, zig_0_10 }:
 
 stdenv.mkDerivation rec {
   pname = "statxt";
