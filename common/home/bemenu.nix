@@ -4,11 +4,14 @@
     enable = true;
     settings =
       let
-        inherit (pie.lib.colors) text light darkest;
+        inherit (pie.lib.colors) text light middle darkest;
       in
       {
         prompt = "launch app";
-        bottom = true;
+        list = "20 down";
+        scrollbar = "always";
+        center = true;
+        width-factor = 0.5;
         ignorecase = true;
 
         # "Title" back/foreground (bemenu-run thing)
@@ -24,6 +27,8 @@
         # List normal / alternating foreground (don't need alternation)
         nf = text;
         af = text;
+        # Scrollbar foreground
+        scf = middle;
       };
   };
 }
