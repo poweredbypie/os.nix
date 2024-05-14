@@ -7,22 +7,28 @@ let
   # https://github.com/Scrumplex/flake/blob/main/nixosConfigurations/common/desktop/sway.nix#L91
   wobSock = "$XDG_RUNTIME_DIR/wob.sock";
 
-  snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
+  snap = args: "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp ${args})\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
   # TODO: This is kind of hard to read and a little cursed
   sound = cmd: val:
+    let
+      bin = "${pkgs.wireplumber}/bin/wpctl";
+    in
     "exec ${pkgs.writeShellScript "sound-${cmd}-${val}" ''
-      wpctl set-${cmd} @DEFAULT_SINK@ ${val}
-      if $(wpctl get-volume @DEFAULT_SINK@ | grep -q 'MUTED'); then
+      ${bin} set-${cmd} @DEFAULT_SINK@ ${val}
+      if $(${bin} get-volume @DEFAULT_SINK@ | grep -q 'MUTED'); then
         echo '0' > ${wobSock}
       else
-        wpctl get-volume @DEFAULT_SINK@ | sed 's/[^0-9]//g' > ${wobSock}
+        ${bin} get-volume @DEFAULT_SINK@ | sed 's/[^0-9]//g' > ${wobSock}
       fi
     ''}";
   bright = val:
+    let
+      cmd = "${pkgs.brightnessctl}/bin/brightnessctl --class=backlight";
+    in
     "exec ${pkgs.writeShellScript "bright-${val}" ''
-      brightnessctl --class=backlight set ${val}
-      current=$(brightnessctl --class=backlight get)
-      max=$(brightnessctl --class=backlight max)
+      ${cmd} set ${val}
+      current=$(${cmd} get)
+      max=$(${cmd} max)
       echo $((current * 100 / max)) > ${wobSock}
     ''}";
 
@@ -41,16 +47,16 @@ let
     let
       apps = rec {
         # "Terminal"
-        t = "alacritty";
+        t = "${pkgs.alacritty}/bin/alacritty";
         # "Browser"
-        b = "firefox";
+        b = "${pkgs.firefox}/bin/firefox";
         # "Run"
-        r = "bemenu-run -b | xargs swaymsg exec --";
+        r = "${pkgs.bemenu}/bin/bemenu-run -b | xargs swaymsg exec --";
         # TODO: Annoyingly, I have Alacritty launch the shell,
         # and have the shell launch nnn. Otherwise nnn can't open
         # kakoune to edit text files. I wonder why...
         # "Filesystem"
-        f = "${t} -e fish -c nnn";
+        f = "${t} -e ${pkgs.fish}/bin/fish -c nnn";
       };
       # Run the specified command.
       run = (app: cmd: mkPair (meta + app) "exec ${cmd}");

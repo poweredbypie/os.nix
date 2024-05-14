@@ -2,13 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    # App launcher
-    bemenu
     # Screenshot util
     grim
     slurp
-    # Brightness
-    brightnessctl
     # Allow access to clipboard from scripts
     wl-clipboard
   ];
