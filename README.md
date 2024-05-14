@@ -2,7 +2,9 @@
 The source files that make up my NixOS setup(s)!
 
 # Pics
-![A picture of my setup. What else did you think this was.](pie/imgs/setup.png)
+![Tiling terminals](pie/imgs/setup-1.png)
+![VM, rnote, zathura](pie/imgs/setup-2.png)
+![Launcher, kakoune](pie/imgs/setup-3.png)
 
 # The stuff I use
 Most of this can also be found under my `setup` GitHub list.
