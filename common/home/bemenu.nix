@@ -9,6 +9,7 @@
       {
         prompt = "launch app";
         bottom = true;
+        ignorecase = true;
 
         # "Title" back/foreground (bemenu-run thing)
         tb = light;
@@ -16,7 +17,7 @@
         # Cursor foreground (the block cursor)
         cf = text;
         # Highlighted selection foreground
-        hf = text;
+        hf = light;
         # List normal / alternating background (don't need alternation)
         nb = darkest;
         ab = darkest;

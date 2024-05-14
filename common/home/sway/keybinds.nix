@@ -50,8 +50,9 @@ let
         t = "${pkgs.alacritty}/bin/alacritty";
         # "Browser"
         b = "${pkgs.firefox}/bin/firefox";
+        # TODO: Stupid hack! sway doesn't inherit BEMENU_OPTS from ../bemenu.nix, so this is my workaround
         # "Run"
-        r = "${pkgs.bemenu}/bin/bemenu-run | xargs swaymsg exec --";
+        r = "${pkgs.fish}/bin/fish -c ${pkgs.bemenu}/bin/bemenu-run | xargs swaymsg exec --";
         # TODO: Annoyingly, I have Alacritty launch the shell,
         # and have the shell launch nnn. Otherwise nnn can't open
         # kakoune to edit text files. I wonder why...
