@@ -16,7 +16,7 @@
         html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
         javascript = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
         json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
-        nix = "${pkgs.rnix-lsp}/bin/rnix-lsp";
+        nix = "${pkgs.nil}/bin/nil";
         rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         svelte = "${pkgs.nodePackages_latest.svelte-language-server}/bin/svelteserver";
         sv = "${pkgs.verible}/bin/verible-verilog-ls";
