@@ -51,7 +51,7 @@ let
         # "Browser"
         b = "${pkgs.firefox}/bin/firefox";
         # "Run"
-        r = "${pkgs.bemenu}/bin/bemenu-run -b | xargs swaymsg exec --";
+        r = "${pkgs.bemenu}/bin/bemenu-run | xargs swaymsg exec --";
         # TODO: Annoyingly, I have Alacritty launch the shell,
         # and have the shell launch nnn. Otherwise nnn can't open
         # kakoune to edit text files. I wonder why...
