@@ -30,6 +30,7 @@
     ./tla.nix
     ./vifm.nix
     ./wine.nix
+    ./wob.nix
     ./xdg
     ./zathura.nix
     ./zig.nix

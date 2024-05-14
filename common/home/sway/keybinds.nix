@@ -3,7 +3,9 @@
 { lib, pkgs, ... }:
 
 let
-  wobSock = "/tmp/wob.sock";
+  # TODO: This should not be like this lol
+  # https://github.com/Scrumplex/flake/blob/main/nixosConfigurations/common/desktop/sway.nix#L91
+  wobSock = "$XDG_RUNTIME_DIR/wob.sock";
 
   snap = args: "exec grim -g \"$(slurp ${args})\" - | wl-copy";
   # TODO: This is kind of hard to read and a little cursed
@@ -84,13 +86,6 @@ let
 in
 {
   wayland.windowManager.sway.config = {
-    startup = [
-      # Make a FIFO for wob
-      {
-        command = "rm -f ${wobSock} && mkfifo ${wobSock} && tail -f ${wobSock} | wob";
-        always = true;
-      }
-    ];
     # Disable resize mode
     modes = { };
     keybindings = {

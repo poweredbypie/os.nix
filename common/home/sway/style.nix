@@ -1,6 +1,6 @@
 # Font, colors, bar config, etc.
 
-{ pkgs, pie, lib, ... }:
+{ pkgs, pie, ... }:
 
 let
   fonts = {
@@ -14,20 +14,6 @@ let
   darkest = "#000000";
 in
 {
-  # TODO: Split this out
-  xdg.configFile."wob/wob.ini".text = lib.generators.toINIWithGlobalSection { } {
-    globalSection = {
-      border_offset = 0;
-      border_size = 0;
-      width = 300;
-      height = 15;
-      anchor = "bottom left";
-      margin = 15;
-      # TODO: Merge with sway settings
-      bar_color = "d19936";
-      bar_padding = 3;
-    };
-  };
   # Cursor (macOS)
   home.pointerCursor = {
     package = pkgs.apple-cursor;
