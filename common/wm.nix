@@ -21,7 +21,7 @@
       let
         style = pkgs.writeText "greet.css" ''
           window {
-            background-image: url("${pie}/imgs/yellowstone.jpg");
+            background-image: url("${pie.imgs.yellowstone}");
             background-size: cover;
             background-position: center;
 

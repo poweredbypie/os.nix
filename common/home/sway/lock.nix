@@ -3,7 +3,7 @@
   programs.swaylock = {
     enable = true;
     settings = {
-      image = "${pie}/imgs/yellowstone.jpg";
+      image = "${pie.imgs.yellowstone}";
       show-failed-attempts = true;
       show-keyboard-layout = true;
       indicator-idle-visible = true;

@@ -1,4 +1,4 @@
-{ ... }:
+{ pie, ... }:
 {
   services.wob = {
     enable = true;
@@ -11,8 +11,7 @@
         height = 15;
         anchor = "bottom left";
         margin = 15;
-        # TODO: Merge with sway settings
-        bar_color = "d19936";
+        bar_color = pie.lib.colors.noPrefix.light;
         bar_padding = 3;
       };
     };

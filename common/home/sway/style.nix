@@ -7,11 +7,7 @@ let
     names = [ "monospace" ];
     size = 10.0;
   };
-  text = "#ffffff";
-  light = "#d19336";
-  middle = "#966924";
-  dark = "#353535";
-  darkest = "#000000";
+  inherit (pie.lib.colors) text light middle dark darkest;
 in
 {
   # Cursor (macOS)
@@ -85,6 +81,6 @@ in
       };
     };
 
-    output."*".bg = "${pie}/imgs/yellowstone.jpg fill";
+    output."*".bg = "${pie.imgs.yellowstone} fill";
   };
 }

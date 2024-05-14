@@ -1,0 +1,4 @@
+{ ... }:
+{
+  colors = (import ./colors.nix { });
+}
