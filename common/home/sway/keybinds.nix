@@ -12,7 +12,7 @@ let
   sound = cmd: val:
     "exec ${pkgs.writeShellScript "sound-${cmd}-${val}" ''
       wpctl set-${cmd} @DEFAULT_SINK@ ${val}
-      if [ ${cmd} = 'mute' ] && $(wpctl get-volume @DEFAULT_SINK@ | grep -q 'MUTED'); then
+      if $(wpctl get-volume @DEFAULT_SINK@ | grep -q 'MUTED'); then
         echo '0' > ${wobSock}
       else
         wpctl get-volume @DEFAULT_SINK@ | sed 's/[^0-9]//g' > ${wobSock}
