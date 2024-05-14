@@ -21,6 +21,8 @@
 
       RUNTIME_PM_ON_AC = "auto";
       RUNTIME_PM_ON_BAT = "auto";
+
+      RUNTIME_PM_DRIVER_DENYLIST = "mei_me nouveau radeon iwlwifi";
     };
   };
 }
