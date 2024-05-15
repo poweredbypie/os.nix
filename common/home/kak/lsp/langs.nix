@@ -67,6 +67,11 @@
               };
               nix = {
                 roots = [ "flake.nix" "shell.nix" ] ++ scm;
+                # Set up formatting
+                settings_section = "nil";
+                settings.nil = {
+                  formatting.command = ["${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"];
+                };
               };
               svelte = node;
               javascript = node;
@@ -83,10 +88,7 @@
               rust = {
                 roots = [ "Cargo.toml" ];
                 settings_section = "rust-analyzer";
-                settings.rust-analyzer = {
-                  # Apparently broken with kak-lsp
-                  hoverActions.enable = false;
-                };
+                settings.rust-analyzer = { };
               };
               sv = {
                 roots = scm;
