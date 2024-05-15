@@ -5,6 +5,6 @@
 {
   home.packages = with pkgs; [
     deno
-    nodejs_21
+    nodejs_22
   ];
 }
