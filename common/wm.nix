@@ -9,9 +9,9 @@ let
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/display-managers/default.nix#L253
   runSway = pkgs.writeShellScript "run-sway" ''
     ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
-    ${pkgs.systemd}/bin/systemctl --user start graphical-session.target
+    ${pkgs.systemd}/bin/systemctl --user start sway-session.target
     sway
-    ${pkgs.systemd}/bin/systemctl --user stop graphical-session.target
+    ${pkgs.systemd}/bin/systemctl --user stop sway-session.target
   '';
 
   swayWrap = pkgs.writeShellScriptBin "sway-wrap" ''
