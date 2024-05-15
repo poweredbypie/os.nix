@@ -5,12 +5,21 @@
     plugins = [ pkgs.editorconfig-core-c ];
     config = {
       # Editorconfig-related options.
-      hooks = [{
-        name = "WinCreate";
-        # Captures any real file; excludes things like the *debug* buffer.
-        option = "^[^*]+$";
-        commands = "editorconfig-load";
-      }];
+      hooks = [
+        {
+          name = "WinCreate";
+          # Captures any real file; excludes things like the *debug* buffer.
+          option = "^[^*]+$";
+          commands = "editorconfig-load";
+        }
+        {
+          name = "RegisterModified";
+          option = "'\"'";
+          commands = ''nop %sh{
+            printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
+          }'';
+        }
+      ];
       indentWidth = 4;
       tabStop = 4;
 
