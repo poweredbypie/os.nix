@@ -54,14 +54,14 @@
         # Inspired by services.xserver.updateDbusEnvironment and the display manager X11 script:
         # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/display-managers/default.nix#L253
         runSway = pkgs.writeShellScript "run-sway" ''
-          ${pkgs.dbus}/dbus-update-activation-environment --systemd --all
+          ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
           ${pkgs.systemd}/bin/systemctl --user start graphical-session.target
           sway
           ${pkgs.systemd}/bin/systemctl --user stop graphical-session.target
         '';
 
         runSwayLog = pkgs.writeShellScript "run-sway-log" ''
-          ${pkgs.systemd}/bin/systemd-cat ${runSway}
+          ${pkgs.systemd}/bin/systemd-cat --identifier=run-sway-log ${runSway}
         '';
 
         # TODO: Let the login manager hibernate when idle
