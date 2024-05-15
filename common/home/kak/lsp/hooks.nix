@@ -12,7 +12,9 @@
         commands = ''
           lsp-enable-window
           # Enables nicer diagnostics
-          lsp-inlay-diagnostics-enable buffer
+          # TODO: This doesn't work because kakoune version is too old
+          # The newest version was pulled a couple days ago but hasn't been upstreamed to nixos-unstable.
+          # lsp-inlay-diagnostics-enable buffer
           lsp-inlay-code-lenses-enable buffer
           lsp-inlay-hints-enable buffer
 
