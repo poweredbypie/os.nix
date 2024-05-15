@@ -53,18 +53,22 @@
 
         # Inspired by services.xserver.updateDbusEnvironment and the display manager X11 script:
         # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/display-managers/default.nix#L253
-        runSway = pkgs.writeShellScript "run-sway.sh" ''
+        runSway = pkgs.writeShellScript "run-sway" ''
           ${pkgs.dbus}/dbus-update-activation-environment --systemd --all
           ${pkgs.systemd}/bin/systemctl --user start graphical-session.target
           sway
           ${pkgs.systemd}/bin/systemctl --user stop graphical-session.target
         '';
 
+        runSwayLog = pkgs.writeShellScript "run-sway-log" ''
+          ${pkgs.systemd}/bin/systemd-cat ${runSway}
+        '';
+
         # TODO: Let the login manager hibernate when idle
         config = pkgs.writeText "greet.sway" ''
           # Fix XDG portal issue
           exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-          exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style} -c ${runSway}; swaymsg exit"
+          exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style} -c ${runSwayLog}; swaymsg exit"
 
           bindsym Ctrl+q exec poweroff
           bindsym Ctrl+r exec reboot
