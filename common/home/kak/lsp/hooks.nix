@@ -55,7 +55,7 @@
     ];
     # Load kak-lsp on startup.
     extraConfig = ''
-        eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+        eval %sh{${pkgs.kakoune-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       lsp-auto-hover-enable
     '';
   };
