@@ -2,6 +2,22 @@
 
 { pkgs, pie, ... }:
 
+# TODO: Help with rewriting services.xserver.displayManager so that it also works for Wayland
+# For now, this is a handrolled, simple graphical session initiator that wraps sway
+let
+  # Inspired by services.xserver.updateDbusEnvironment and the display manager X11 script:
+  # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/display-managers/default.nix#L253
+  runSway = pkgs.writeShellScript "run-sway" ''
+    ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
+    ${pkgs.systemd}/bin/systemctl --user start graphical-session.target
+    sway
+    ${pkgs.systemd}/bin/systemctl --user stop graphical-session.target
+  '';
+
+  swayWrap = pkgs.writeShellScriptBin "sway-wrap" ''
+    ${pkgs.systemd}/bin/systemd-cat --identifier=sway-wrap ${runSway}
+  '';
+in
 {
   # Annoyingly, since this has some dependency on GL etc,
   # this has to be set here instead of in the home manager config.
@@ -14,6 +30,8 @@
     wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
+
+  environment.systemPackages = [ swayWrap ];
 
   services.greetd = {
     enable = true;
@@ -51,24 +69,11 @@
           }
         '';
 
-        # Inspired by services.xserver.updateDbusEnvironment and the display manager X11 script:
-        # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/display-managers/default.nix#L253
-        runSway = pkgs.writeShellScript "run-sway" ''
-          ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
-          ${pkgs.systemd}/bin/systemctl --user start graphical-session.target
-          sway
-          ${pkgs.systemd}/bin/systemctl --user stop graphical-session.target
-        '';
-
-        runSwayLog = pkgs.writeShellScript "run-sway-log" ''
-          ${pkgs.systemd}/bin/systemd-cat --identifier=run-sway-log ${runSway}
-        '';
-
         # TODO: Let the login manager hibernate when idle
         config = pkgs.writeText "greet.sway" ''
           # Fix XDG portal issue
           exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-          exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style} -c ${runSwayLog}; swaymsg exit"
+          exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style} -c sway-wrap; swaymsg exit"
 
           bindsym Ctrl+q exec poweroff
           bindsym Ctrl+r exec reboot
@@ -80,7 +85,7 @@
   };
 
   environment.etc."greetd/environments".text = ''
-    sway
+    sway-wrap
     fish
   '';
 }
