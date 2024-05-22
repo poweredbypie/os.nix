@@ -19,7 +19,6 @@
     };
     # Use IWD's integrated service instead.
     dhcpcd.enable = false;
-    useNetworkd = true;
   };
   services.resolved = {
     enable = true;
