@@ -24,8 +24,6 @@
     systemd = {
       enable = true;
       xdgAutostart = true;
-      # TODO: Don't activate systemd target, this is already hackily handled by greetd
-      extraCommands = [];
     };
   };
 }

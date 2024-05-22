@@ -9,7 +9,7 @@ let
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/display-managers/default.nix#L253
   runSway = pkgs.writeShellScript "run-sway" ''
     ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
-    ${pkgs.systemd}/bin/systemctl --user start sway-session.target
+    # Sway config already initializes the target, we just need to stop it after sway exits.
     sway
     ${pkgs.systemd}/bin/systemctl --user stop sway-session.target
   '';
