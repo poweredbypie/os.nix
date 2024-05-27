@@ -3,26 +3,33 @@
 { ... }:
 
 {
+  # networking = {
+  #   # Use iwd.
+  #   wireless.iwd = {
+  #     enable = true;
+  #     settings = {
+  #       # Enable integrated DHCP.
+  #       General.EnableNetworkConfiguration = true;
+  #       Network = {
+  #         EnableIPv6 = true;
+  #         NameResolvingService = "systemd";
+  #       };
+  #       Settings.AutoConnect = true;
+  #     };
+  #   };
+  #   # Use IWD's integrated service instead.
+  #   dhcpcd.enable = false;
+  # };
   networking = {
-    # Use iwd.
-    wireless.iwd = {
+    wireless = {
       enable = true;
-      settings = {
-        # Enable integrated DHCP.
-        General.EnableNetworkConfiguration = true;
-        Network = {
-          EnableIPv6 = true;
-          NameResolvingService = "systemd";
-        };
-        Settings.AutoConnect = true;
-      };
+      userControlled.enable = true;
     };
-    # Use IWD's integrated service instead.
-    dhcpcd.enable = false;
+    dhcpcd.enable = true;
   };
-  services.resolved = {
-    enable = true;
-    fallbackDns = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
-    extraConfig = "DNS=1.1.1.1 8.8.8.8 8.8.4.4";
-  };
+  # services.resolved = {
+  #   enable = true;
+  #   fallbackDns = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
+  #   extraConfig = "DNS=1.1.1.1 8.8.8.8 8.8.4.4";
+  # };
 }

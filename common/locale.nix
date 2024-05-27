@@ -22,6 +22,10 @@ in
           DefaultIM = "pinyin";
         };
         "Groups/0/Items/0" = {
+          Name = "keyboard-us";
+          Layout = "";
+        };
+        "Groups/0/Items/1" = {
           Name = "pinyin";
           Layout = "";
         };
