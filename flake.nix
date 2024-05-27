@@ -58,6 +58,8 @@
           verthe = mkSystem "verthe" "x86-64-linux";
           # Laptop
           zen = mkSystem "zen" "x86-64-linux";
+          # Desktop 2
+          beep = mkSystem "beep" "x86-64-linux";
         };
     };
 }
