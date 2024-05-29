@@ -8,17 +8,20 @@ let
     size = 10.0;
   };
   inherit (pie.lib.colors) text light middle dark darkest;
+  cursorTheme = "macOS-Monterey-White";
+  # TODO: Make this customizable
+  cursorSize = 24;
 in
 {
   # Cursor (macOS)
   home.pointerCursor = {
     package = pkgs.apple-cursor;
-    name = "macOS-Monterey-White";
-    # TODO: I don't know why but in GTK apps this is SLIGHTLY smaller than outside. WHY???
-    size = 16;
+    name = cursorTheme;
+    size = cursorSize;
     gtk.enable = true;
   };
   wayland.windowManager.sway.config = {
+    seat."*".xcursor_theme = "${cursorTheme} ${builtins.toString cursorSize}";
     # Default environment behavior stuff
     workspaceLayout = "default";
     focus.mouseWarping = "container";
