@@ -12,15 +12,16 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, rust-overlay }:
+  outputs = { self, nixpkgs, nur, home-manager, rust-overlay, nixos-hardware }:
     let
       args = {
         pie = import ./pie { };
       };
 
-      mkSystem = name: system:
+      mkSystem = name: system: extraModules:
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -46,7 +47,7 @@
                 (import ./pie/pkgs)
               ];
             }
-          ];
+          ] ++ extraModules;
           specialArgs = args;
         };
     in
@@ -55,9 +56,13 @@
       nixosConfigurations =
         {
           # Desktop
-          verthe = mkSystem "verthe" "x86-64-linux";
+          verthe = mkSystem "verthe" "x86-64-linux" [ ];
+          # Old laptop
+          zen = mkSystem "zen" "x86-64-linux" [ ];
           # Laptop
-          zen = mkSystem "zen" "x86-64-linux";
+          gear = mkSystem "gear" "x86-64-linux" [
+            nixos-hardware.nixosModules.framework-11th-gen-intel
+          ];
         };
     };
 }
