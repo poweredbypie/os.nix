@@ -10,7 +10,7 @@ let
   runSway = pkgs.writeShellScript "run-sway" ''
     ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
     # Sway config already initializes the target, we just need to stop it after sway exits.
-    sway
+    NIXOS_OZONE_WL=1 sway
     ${pkgs.systemd}/bin/systemctl --user stop sway-session.target
   '';
 
