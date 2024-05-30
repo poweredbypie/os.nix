@@ -20,6 +20,7 @@ in
     size = cursorSize;
     gtk.enable = true;
   };
+
   wayland.windowManager.sway.config = {
     seat."*".xcursor_theme = "${cursorTheme} ${builtins.toString cursorSize}";
     # Default environment behavior stuff
@@ -29,7 +30,17 @@ in
     # Window / bar style and colors
     inherit fonts;
 
-    window.border = 1;
+    # Let firefox PiP show on top of other windows
+    window = {
+      border = 1;
+      commands = [{
+        criteria = {
+          app_id = "firefox";
+          title = "Picture-in-Picture";
+        };
+        command = "floating enable";
+      }];
+    };
 
     gaps.inner = 5;
 
