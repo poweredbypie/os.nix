@@ -6,11 +6,12 @@
   services.tlp = {
     enable = true;
     settings = {
-      STOP_CHARGE_THRESH_BAT1 = 90;
       # Disable annoying pop noise when controller goes to sleep
       # Thanks https://community.frame.work/t/responded-headphone-jack-intermittent-noise/5246/61
       SOUND_POWER_SAVE_ON_AC = 0;
       SOUND_POWER_SAVE_ON_BAT = 0;
+
+      # Battery threshold is configured in BIOS for Frameworks
 
       CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
