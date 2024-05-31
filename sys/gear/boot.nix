@@ -15,7 +15,7 @@
     };
     # Patch the firmware to force the audio input as the internal mic
     extraModprobeConfig = ''
-      options snd-hda-intel patch=hda-jack-retask.fw
+      options snd-hda-intel patch=hda-jack-retask.fw dmic_detect=0
     '';
   };
 }
