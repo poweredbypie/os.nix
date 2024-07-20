@@ -31,6 +31,7 @@
     ./tla.nix
     ./vifm.nix
     ./wine.nix
+    ./wireguard.nix
     ./wob.nix
     ./xdg
     ./zathura.nix
