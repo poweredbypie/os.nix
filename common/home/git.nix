@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.git = {
@@ -23,8 +23,20 @@
       s = "status";
     };
 
-    userName = "PoweredByPie";
-    userEmail = "poweredbypie@users.noreply.github.com";
+
+    includes = [
+      {
+        condition = "gitdir:~/src/irl/";
+        path = config.sops.secrets.git-irl.path;
+      }
+      {
+        condition = "gitdir:~/src/pie/";
+        contents = {
+          user.name = "PoweredByPie";
+          user.email = "poweredbypie@users.noreply.github.com";
+        };
+      }
+    ];
 
     extraConfig = {
       init.defaultBranch = "main";

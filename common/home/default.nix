@@ -27,6 +27,7 @@
     ./rust.nix
     ./rnote.nix
     ./nnn.nix
+    ./sops.nix
     ./sway
     ./tla.nix
     ./vifm.nix

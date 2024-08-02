@@ -1,0 +1,7 @@
+keys:
+  - &gear age1x7jy46z9yq5lrgpsmkmppp2x3m4pjutfgfxk552yq38st8u0lg4qemajc8
+creation_rules:
+  - path_regex: secrets/*
+    key_groups:
+    - age:
+      - *gear

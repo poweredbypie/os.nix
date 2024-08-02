@@ -13,9 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, rust-overlay, nixos-hardware }:
+  outputs = { self, nixpkgs, nur, home-manager, rust-overlay, nixos-hardware, sops-nix }:
     let
       args = {
         pie = import ./pie { };
@@ -25,6 +26,8 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+            ./secrets
+            sops-nix.nixosModules.sops
             ./common
             ./sys/${name}
             # Set the hostname in the flake.
@@ -37,6 +40,8 @@
                   imports = [
                     ./common/home
                     ./sys/${name}/home
+                    sops-nix.homeManagerModules.sops
+                    ./secrets
                   ];
                 };
                 extraSpecialArgs = args;
