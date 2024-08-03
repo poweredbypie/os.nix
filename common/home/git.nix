@@ -26,15 +26,15 @@
 
     includes = [
       {
-        condition = "gitdir:~/src/irl/";
-        path = config.sops.secrets.git-irl.path;
-      }
-      {
-        condition = "gitdir:~/src/pie/";
+        condition = "gitdir:~/src/";
         contents = {
           user.name = "PoweredByPie";
           user.email = "poweredbypie@users.noreply.github.com";
         };
+      }
+      {
+        condition = "gitdir:~/src/irl/";
+        path = config.sops.secrets.git-irl.path;
       }
     ];
 
