@@ -28,6 +28,7 @@
     ./rnote.nix
     ./nnn.nix
     ./sops.nix
+    ./ssh.nix
     ./sway
     ./tla.nix
     ./vifm.nix
