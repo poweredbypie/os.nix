@@ -116,6 +116,6 @@ in
       "${meta}x" = "kill";
       "${ctrl + alt}Delete" = "exec swaymsg exit";
     } // launch // move // spaces;
-    floating.modifier = meta;
+    floating.modifier = "Mod4";
   };
 }
