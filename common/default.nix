@@ -10,7 +10,6 @@
     ./net.nix
     ./nix.nix
     ./sound.nix
-    ./steam.nix
     ./users.nix
     ./virt.nix
     ./wm.nix
