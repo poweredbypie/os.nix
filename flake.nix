@@ -45,6 +45,7 @@
                   ];
                 };
                 extraSpecialArgs = args;
+                backupFileExtension = "hm-backup";
               };
               nixpkgs.overlays = [
                 nur.overlay
