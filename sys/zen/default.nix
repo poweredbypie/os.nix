@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./android.nix
     ./boot.nix
     ./bluetooth.nix
     ./ccache.nix
