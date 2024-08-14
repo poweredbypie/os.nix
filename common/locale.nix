@@ -12,7 +12,8 @@ in
   console.keyMap = "us";
 
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    enable = true;
+    type = "fcitx5";
     fcitx5.settings = {
       inputMethod = {
         # Thanks https://github.com/leana8959!
