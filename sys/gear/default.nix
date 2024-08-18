@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./android.nix
     ./boot.nix
     ./gl.nix
     ./hardware-configuration.nix
