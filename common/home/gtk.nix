@@ -13,7 +13,7 @@ in
     gtk3 = dark;
     gtk4 = dark;
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
   };

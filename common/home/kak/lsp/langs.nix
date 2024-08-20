@@ -10,12 +10,12 @@
       toTOML = config: (pkgs.formats.toml { }).generate "${lsp}.toml" config;
       lsps = {
         c_cpp = "${pkgs.clang-tools_15}/bin/clangd";
-        css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
+        # css = "${pkgs.nodePackages_latest.vscode-css-languageserver-bin}/bin/css-languageserver";
         go = "${pkgs.gopls}/bin/gopls";
         haskell = "${pkgs.haskell-language-server}/bin/haskell-language-server-wrapper";
-        html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
+        # html = "${pkgs.nodePackages_latest.vscode-html-languageserver-bin}/bin/html-languageserver";
         javascript = "${pkgs.nodePackages_latest.typescript-language-server}/bin/typescript-language-server";
-        json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
+        # json = "${pkgs.nodePackages_latest.vscode-json-languageserver-bin}/bin/json-languageserver";
         nix = "${pkgs.nil}/bin/nil";
         rust = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         svelte = "${pkgs.nodePackages_latest.svelte-language-server}/bin/svelteserver";
@@ -53,7 +53,7 @@
               c_cpp = {
                 roots = [ "compile_commands.json" ".clangd" ] ++ scm;
               };
-              css = node;
+              # css = node;
               go = {
                 roots = [ "go.mod" ] ++ scm;
               };
@@ -61,7 +61,7 @@
                 roots = [ "Setup.hs" "stack.yaml" "*.cabal" ];
                 args = [ "--lsp" ];
               };
-              html = node;
+              # html = node;
               latex = {
                 roots = scm;
               };
@@ -70,12 +70,12 @@
                 # Set up formatting
                 settings_section = "nil";
                 settings.nil = {
-                  formatting.command = ["${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"];
+                  formatting.command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ];
                 };
               };
               svelte = node;
               javascript = node;
-              json = node;
+              # json = node;
               # typescript = node;
               typescript = {
                 roots = [ "deno.json" ] ++ scm;
