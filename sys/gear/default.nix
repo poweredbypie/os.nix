@@ -4,7 +4,7 @@
   imports = [
     ./android.nix
     ./boot.nix
-    ./gl.nix
+    ./graphics.nix
     ./hardware-configuration.nix
     ./net.nix
     ./power.nix
