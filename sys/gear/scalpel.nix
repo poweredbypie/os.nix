@@ -4,9 +4,7 @@ let
   beep-start = prev.config.systemd.services."${beep-wg}".serviceConfig.ExecStart;
 in
 {
-  systemd.services."${beep-wg}".serviceConfig.ExecStart = lib.mkForce (
-    builtins.replaceStrings [ beep-start ] [ config.scalpel.trafos.beep-wg.destination ] beep-start
-  );
+  systemd.services."${beep-wg}".serviceConfig.ExecStart = lib.mkForce config.scalpel.trafos.beep-wg.destination;
 
   scalpel.trafos.beep-wg = {
     source = beep-start;
