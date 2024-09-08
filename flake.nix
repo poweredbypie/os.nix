@@ -13,10 +13,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    scalpel = {
+      url = "github:polygon/scalpel";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.sops-nix.follows = "sops-nix";
+    };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, rust-overlay, nixos-hardware, sops-nix }:
+  outputs = { self, nixpkgs, nur, home-manager, rust-overlay, nixos-hardware, sops-nix, scalpel }:
     let
       args = {
         pie = import ./pie { };
