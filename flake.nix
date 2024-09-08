@@ -74,9 +74,19 @@
           # Old laptop
           zen = mkSystem "zen" "x86-64-linux" [ ];
           # Laptop
-          gear = mkSystem "gear" "x86-64-linux" [
-            nixos-hardware.nixosModules.framework-11th-gen-intel
-          ];
+          gear =
+            let
+              base = mkSystem "gear" "x86-64-linux" [
+                nixos-hardware.nixosModules.framework-11th-gen-intel
+              ];
+            in
+            base.extendModules {
+              modules = [
+                scalpel.nixosModules.scalpel
+                ./sys/gear/scalpel.nix
+              ];
+              specialArgs = { prev = base; };
+            };
         };
     };
 }
