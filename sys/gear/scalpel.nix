@@ -4,15 +4,13 @@ let
   beep-start = prev.config.systemd.services."${beep-wg}".serviceConfig.ExecStart;
 in
 {
-  systemd.services.${beep-wg}.serviceConfig.ExecStart = lib.mkForce (
+  systemd.services."${beep-wg}".serviceConfig.ExecStart = lib.mkForce (
     builtins.replaceStrings [ beep-start ] [ config.scalpel.trafos.beep-wg.destination ] beep-start
   );
 
   scalpel.trafos.beep-wg = {
     source = beep-start;
     matchers.beep-ip.secret = config.sops.secrets."wireguard/ips/beep".path;
-    owner = "root";
-    group = "root";
     mode = "0555";
   };
 }
