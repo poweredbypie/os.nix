@@ -8,7 +8,7 @@ let
     size = 10.0;
   };
   inherit (pie.lib.colors) text light middle dark darkest;
-  cursorTheme = "macOS-Monterey-White";
+  cursorTheme = "macOS-White";
   # TODO: Make this customizable
   cursorSize = 24;
 in
