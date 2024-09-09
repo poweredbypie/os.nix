@@ -23,6 +23,9 @@ in
         "github.com" = {
           identityFile = pie;
         };
+        "git.sr.ht" = {
+          identityFile = pie;
+        };
       };
     };
 }
