@@ -1,4 +1,0 @@
-{ ... }:
-{
-  yellowstone = ./yellowstone.jpg;
-}

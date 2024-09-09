@@ -26,10 +26,6 @@
 
   outputs = { self, nixpkgs, nur, home-manager, rust-overlay, nixos-hardware, sops-nix, scalpel }:
     let
-      args = {
-        pie = import ./pie { };
-      };
-
       mkSystem = name: system: extraModules:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -52,17 +48,15 @@
                     ./sys/${name}/home
                   ];
                 };
-                extraSpecialArgs = args;
                 backupFileExtension = "hm-backup";
               };
               nixpkgs.overlays = [
                 nur.overlay
                 rust-overlay.overlays.default
-                (import ./pie/pkgs)
+                (import ./pkgs)
               ];
             }
           ] ++ extraModules;
-          specialArgs = args;
         };
     in
     {
