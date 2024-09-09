@@ -34,22 +34,22 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./secrets
+            { networking.hostName = name; }
             sops-nix.nixosModules.sops
-            ./common
+            ./modules
+            ./secrets
             ./sys/${name}
             # Set the hostname in the flake.
-            { networking.hostName = name; }
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 users.pie = {
                   imports = [
-                    ./common/home
-                    ./sys/${name}/home
                     sops-nix.homeManagerModules.sops
+                    ./modules/home
                     ./secrets
+                    ./sys/${name}/home
                   ];
                 };
                 extraSpecialArgs = args;
