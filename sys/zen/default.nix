@@ -12,4 +12,9 @@
     ./print.nix
     ./tablet.nix
   ];
+
+  pie = {
+    base.enable = true;
+    desktop.enable = true;
+  };
 }

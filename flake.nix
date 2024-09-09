@@ -64,7 +64,7 @@
       nixosConfigurations =
         {
           # Desktop
-          verthe = mkSystem "verthe" "x86-64-linux" [ ];
+          # verthe = mkSystem "verthe" "x86-64-linux" [ ];
           # Old laptop
           zen = mkSystem "zen" "x86-64-linux" [ ];
           # Laptop
