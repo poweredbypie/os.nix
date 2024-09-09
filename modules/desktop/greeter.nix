@@ -44,10 +44,9 @@ in
         enable = true;
         settings =
           let
-            # TODO: For some reason the background image being set here ends up with an infinite recursion and I'm too tired to figure it out
             style = pkgs.writeText "greet.css" ''
               window {
-                background-image: url("");
+                background-image: url("${config.pie.background}");
                 background-size: cover;
                 background-position: center;
 
@@ -77,7 +76,7 @@ in
               }
             '';
             # TODO: Let the login manager hibernate when idle
-            config = pkgs.writeText "greet.sway" ''
+            swayConfig = pkgs.writeText "greet.sway" ''
               # Fix XDG portal issue
               exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
               exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${style}; swaymsg exit"
@@ -86,7 +85,7 @@ in
             '';
           in
           {
-            default_session.command = "sway --config ${config}";
+            default_session.command = "sway --config ${swayConfig}";
           };
       };
       environment.etc."greetd/environments".text = lib.concatStringsSep "\n" cfg.environments;
