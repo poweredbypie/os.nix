@@ -4,6 +4,6 @@
   imports = [
     ./base
     ./desktop
-    ./pie.nix
+    ./theme.nix
   ];
 }

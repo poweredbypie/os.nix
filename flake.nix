@@ -42,9 +42,10 @@
                 useGlobalPkgs = true;
                 users.pie = {
                   imports = [
+                    { pie.host = name; }
                     sops-nix.homeManagerModules.sops
                     ./modules/home
-                    ./secrets
+                    ./secrets/home
                     ./sys/${name}/home
                   ];
                 };

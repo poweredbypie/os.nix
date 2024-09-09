@@ -19,24 +19,27 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    pie.home.base = {
-      fish.enable = true;
-      nnn.enable = true;
-    };
-    # Same as the Nix version, I've heard I shouldn't touch this.
-    home.stateVersion = "22.11";
-    programs.home-manager.enable = true;
+  config = lib.mkIf cfg.enable
+    (lib.mkMerge [
+      {
+        pie.home.base = {
+          fish.enable = true;
+          nnn.enable = true;
+        };
+        # Same as the Nix version, I've heard I shouldn't touch this.
+        home.stateVersion = "22.11";
+        programs.home-manager.enable = true;
 
-    # Move bash's history file so it's cleaner.
-    home.sessionVariables.HISTFILE = "${config.xdg.stateHome}/bash_history";
+        # Move bash's history file so it's cleaner.
+        home.sessionVariables.HISTFILE = "${config.xdg.stateHome}/bash_history";
 
-    # Enable manuals.
-    programs.man = {
-      enable = true;
-      generateCaches = true;
-    };
-
-    home.packages = cfg.apps;
-  };
+        # Enable manuals.
+        programs.man = {
+          enable = true;
+          generateCaches = true;
+        };
+        home.packages = cfg.apps;
+      }
+      (import ./ssh.nix { inherit config; })
+    ]);
 }

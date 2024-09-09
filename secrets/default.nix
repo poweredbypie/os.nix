@@ -7,10 +7,6 @@
     secrets = {
       "wireguard/keys/gear" = { };
       "wireguard/ips/beep" = { };
-      git-irl = {
-        format = "binary";
-        sopsFile = ./git-irl;
-      };
     };
   };
 }
