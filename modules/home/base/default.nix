@@ -40,6 +40,6 @@ in
         };
         home.packages = cfg.apps;
       }
-      (lib.mkIf config.pie.home.secrets.enable (import ./ssh.nix { inherit config; }))
+      (lib.mkIf config.pie.secrets.enable (import ./ssh.nix { inherit config; }))
     ]);
 }

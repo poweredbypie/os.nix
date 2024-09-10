@@ -39,7 +39,7 @@ in
           user.email = "poweredbypie@users.noreply.github.com";
         };
       }]
-      ++ (lib.optional config.pie.home.secrets.enable
+      ++ (lib.optional config.pie.secrets.enable
         {
           condition = "gitdir:~/src/irl/";
           path = config.sops.secrets.git-irl.path;

@@ -2,7 +2,6 @@
 
 let
   cfg = config.pie.secrets;
-  host = config.networking.hostName;
   sopsFile = ./secrets.yaml;
 in
 {
@@ -14,7 +13,6 @@ in
   config = lib.mkIf cfg.enable {
     sops = {
       age.keyFile = "/home/pie/.config/sops/age/keys.txt";
-      defaultSopsFile = ../../sys/${host}/secrets.yaml;
       defaultSopsFormat = "yaml";
 
       secrets = lib.mkMerge [
@@ -26,6 +24,21 @@ in
         {
           # beep's Wireguard endpoint
           "wireguard/ips/beep" = { inherit sopsFile; };
+          # gear's publish SSH keys
+          "ssh/gear/pie" = { inherit sopsFile; };
+          "ssh/gear/irl" = { inherit sopsFile; };
+          # zen's publish SSH keys
+          "ssh/zen/pie" = { inherit sopsFile; };
+          "ssh/zen/irl" = { inherit sopsFile; };
+
+          git-irl = {
+            format = "binary";
+            sopsFile = ./git-irl;
+          };
+          ssh-irl = {
+            format = "binary";
+            sopsFile = ./ssh-irl;
+          };
         }
       ];
     };

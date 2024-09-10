@@ -31,6 +31,7 @@
           inherit system;
           modules = [
             { networking.hostName = name; }
+            { sops.defaultSopsFile = ./sys/${name}/secrets.yaml; }
             sops-nix.nixosModules.sops
             ./modules
             ./sys/${name}
@@ -41,7 +42,8 @@
                 useGlobalPkgs = true;
                 users.pie = {
                   imports = [
-                    { pie.host = name; }
+                    { networking.hostName = name; }
+                    { sops.defaultSopsFile = ./sys/${name}/secrets.yaml; }
                     sops-nix.homeManagerModules.sops
                     ./modules/home
                     ./sys/${name}/home

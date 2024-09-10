@@ -1,14 +1,19 @@
 { config, lib, ... }:
 
 let
-  cfg = config.pie.home.secrets;
+  cfg = config.pie.secrets;
   home = config.home.homeDirectory;
-  host = config.pie.host;
-  sopsFile = ./secrets.yaml;
+  host = config.networking.hostName;
 in
 {
-  options.pie.home.secrets = {
-    enable = lib.mkEnableOption "Whether to enable secret management.";
+  # Import shared secrets to home
+  imports = [
+    ../secrets
+  ];
+
+  # TODO: I can probably extract out the shared parts of both the OS and home manager modules
+  # and pass in the "namespace" I want the module to live under.
+  options.pie.secrets = {
     # Most hosts should have SSH keys so this is fine
     hasSSH = lib.mkEnableOption "Whether the host has an SSH key." // { default = true; };
   };
@@ -16,7 +21,6 @@ in
   config = lib.mkIf cfg.enable {
     sops = {
       age.keyFile = "/home/pie/.config/sops/age/keys.txt";
-      defaultSopsFile = ../../../sys/${host}/home/secrets.yaml;
       defaultSopsFormat = "yaml";
 
       secrets = lib.mkMerge [
@@ -35,23 +39,6 @@ in
             path = "${home}/.ssh/irl.pub";
           };
         })
-        # Shared secrets
-        {
-          git-irl = {
-            format = "binary";
-            sopsFile = ./git-irl;
-          };
-          ssh-irl = {
-            format = "binary";
-            sopsFile = ./ssh-irl;
-          };
-          # gear's publish SSH keys
-          "ssh/gear/pie" = { inherit sopsFile; };
-          "ssh/gear/irl" = { inherit sopsFile; };
-          # zen's publish SSH keys
-          "ssh/zen/pie" = { inherit sopsFile; };
-          "ssh/zen/irl" = { inherit sopsFile; };
-        }
       ];
     };
   };
