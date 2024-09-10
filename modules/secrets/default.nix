@@ -26,12 +26,6 @@ in
         {
           # beep's Wireguard endpoint
           "wireguard/ips/beep" = { inherit sopsFile; };
-          # gear's publish SSH keys
-          "ssh/gear/pie" = { inherit sopsFile; };
-          "ssh/gear/irl" = { inherit sopsFile; };
-          # zen's publish SSH keys
-          "ssh/zen/pie" = { inherit sopsFile; };
-          "ssh/zen/irl" = { inherit sopsFile; };
         }
       ];
     };

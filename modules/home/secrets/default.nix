@@ -2,7 +2,9 @@
 
 let
   cfg = config.pie.home.secrets;
+  home = config.home.homeDirectory;
   host = config.pie.host;
+  sopsFile = ./secrets.yaml;
 in
 {
   options.pie.home.secrets = {
@@ -20,8 +22,18 @@ in
       secrets = lib.mkMerge [
         # System-specific secrets
         (lib.mkIf cfg.hasSSH {
-          "ssh/pie" = { };
-          "ssh/irl" = { };
+          "ssh/pie" = {
+            path = "${home}/.ssh/pie";
+          };
+          "ssh/irl" = {
+            path = "${home}/.ssh/irl";
+          };
+          "ssh/${host}/pie" = {
+            path = "${home}/.ssh/pie.pub";
+          };
+          "ssh/${host}/irl" = {
+            path = "${home}/.ssh/irl.pub";
+          };
         })
         # Shared secrets
         {
@@ -33,6 +45,12 @@ in
             format = "binary";
             sopsFile = ./ssh-irl;
           };
+          # gear's publish SSH keys
+          "ssh/gear/pie" = { inherit sopsFile; };
+          "ssh/gear/irl" = { inherit sopsFile; };
+          # zen's publish SSH keys
+          "ssh/zen/pie" = { inherit sopsFile; };
+          "ssh/zen/irl" = { inherit sopsFile; };
         }
       ];
     };
