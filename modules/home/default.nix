@@ -1,6 +1,6 @@
 # Home manager-related config
 
-{ config, lib, ... }:
+{ lib, ... }:
 
 {
   imports = [
@@ -8,6 +8,7 @@
     ./desktop
     ./dev-tools
     ./games.nix
+    ./secrets
     ../theme.nix
   ];
 

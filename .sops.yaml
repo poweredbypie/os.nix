@@ -3,7 +3,25 @@ keys:
   - &zen age1ll97gtxezzc7fhq8g4qg3ny0xfxfd96rs3605d3ncrjvquhg4e6sscs27u
   - &beep age1v7e7fymuq90lrv09yvhuefc92jsqwu5h5v7pvm4jajcz5kq78gfsjvx4sl
 creation_rules:
-  - path_regex: secrets/*
+  - path_regex: ^sys/gear/*
+    key_groups:
+    - age:
+        - *gear
+  - path_regex: ^sys/zen/*
+    key_groups:
+    - age:
+        - *zen
+  - path_regex: ^sys/beep/*
+    key_groups:
+    - age:
+        - *beep
+  - path_regex: ^modules/secrets/*
+    key_groups:
+    - age:
+      - *gear
+      - *zen
+      - *beep
+  - path_regex: ^modules/home/secrets/*
     key_groups:
     - age:
       - *gear

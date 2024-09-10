@@ -32,19 +32,18 @@ in
       };
 
 
-      includes = [
-        {
-          condition = "gitdir:~/src/";
-          contents = {
-            user.name = "PoweredByPie";
-            user.email = "poweredbypie@users.noreply.github.com";
-          };
-        }
+      includes = [{
+        condition = "gitdir:~/src/";
+        contents = {
+          user.name = "PoweredByPie";
+          user.email = "poweredbypie@users.noreply.github.com";
+        };
+      }]
+      ++ (lib.optional config.pie.home.secrets.enable
         {
           condition = "gitdir:~/src/irl/";
           path = config.sops.secrets.git-irl.path;
-        }
-      ];
+        });
 
       extraConfig = {
         init.defaultBranch = "main";

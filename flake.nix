@@ -33,7 +33,6 @@
             { networking.hostName = name; }
             sops-nix.nixosModules.sops
             ./modules
-            ./secrets
             ./sys/${name}
             # Set the hostname in the flake.
             home-manager.nixosModules.home-manager
@@ -45,7 +44,6 @@
                     { pie.host = name; }
                     sops-nix.homeManagerModules.sops
                     ./modules/home
-                    ./secrets/home
                     ./sys/${name}/home
                   ];
                 };

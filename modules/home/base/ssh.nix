@@ -1,12 +1,9 @@
 { config, ... }:
 
-let
-  inherit (config.pie) host;
-in
 {
   programs.ssh =
     let
-      pie = config.sops.secrets."ssh/${host}/pie".path;
+      pie = config.sops.secrets."ssh/pie".path;
     in
     {
       enable = true;

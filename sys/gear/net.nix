@@ -6,7 +6,7 @@
     enable = true;
     interfaces.wg0 = {
       ips = [ "192.168.155.4/24" ];
-      privateKeyFile = config.sops.secrets."wireguard/keys/gear".path;
+      privateKeyFile = config.sops.secrets."wireguard/key".path;
 
       peers = [{
         name = "beep";
