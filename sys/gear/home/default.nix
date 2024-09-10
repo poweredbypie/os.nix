@@ -15,5 +15,6 @@
     dev-tools.enable = true;
     games.enable = true;
   };
+
   pie.secrets.enable = true;
 }
