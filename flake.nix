@@ -82,6 +82,7 @@
               ];
               specialArgs = { prev = base; };
             };
+          beep = mkSystem "beep" "x86-64-linux" [ ];
         };
     };
 }

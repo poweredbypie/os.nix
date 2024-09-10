@@ -24,12 +24,43 @@ in
         {
           # beep's Wireguard endpoint
           "wireguard/ips/beep" = { inherit sopsFile; };
-          # gear's publish SSH keys
-          "ssh/gear/pie" = { inherit sopsFile; };
-          "ssh/gear/irl" = { inherit sopsFile; };
-          # zen's publish SSH keys
-          "ssh/zen/pie" = { inherit sopsFile; };
-          "ssh/zen/irl" = { inherit sopsFile; };
+          # gear's public SSH keys
+          "ssh/gear/pie" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          "ssh/gear/irl" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          # zen's public SSH keys
+          "ssh/zen/pie" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          "ssh/zen/irl" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          # xi's public SSH key
+          "ssh/xi/pie" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          # beep's public SSH key
+          "ssh/beep/pie" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          "ssh/beep/irl" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
+          # verthe's public SSH key
+          "ssh/verthe/pie" = {
+            inherit sopsFile;
+            mode = "0444";
+          };
 
           git-irl = {
             format = "binary";
