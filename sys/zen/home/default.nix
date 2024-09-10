@@ -14,5 +14,6 @@
     desktop.enable = true;
     dev-tools.enable = true;
     games.enable = true;
+    secrets.enable = true;
   };
 }

@@ -16,5 +16,6 @@
   pie = {
     base.enable = true;
     desktop.enable = true;
+    secrets.enable = true;
   };
 }
