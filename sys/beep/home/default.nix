@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     hddtemp
     minecraft-server-hibernation
+    jre_minimal
     tmux
     wol
   ];
