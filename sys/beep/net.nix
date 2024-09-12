@@ -55,25 +55,29 @@
           '';
 
           peers = [
-            # verthe (Windows)
+            # Desktop
             {
+              name = "verthe";
               publicKey = "8VMAmorVZx2mcakVlAcu8+6rdT9w+Krx+zmU/McTLF8=";
               allowedIPs = [ "192.168.155.2/32" ];
               # This is a fixed endpoint.
               endpoint = "192.168.1.156:51820";
             }
-            # xi (iPhone)
+            # iPhone
             {
+              name = "xi";
               publicKey = "vuLZN4uYP+khgI4QYGaunDJ21A3ix6EM8USzPkEcY2c=";
               allowedIPs = [ "192.168.155.3/32" ];
             }
-            # gear (Linux laptop)
+            # Laptop
             {
+              name = "gear";
               publicKey = "SjyDPxHd8/FHl2jIDK1g7vPcOpT3Q+HXL9CaglkUXH8=";
               allowedIPs = [ "192.168.155.4/32" ];
             }
             # pi (Raspberry Pi 2B)
             {
+              name = "pi";
               publicKey = "xtc25CJPGU4edeq7Q5Gnac1kX7XZ929eWsseE+5ba2o=";
               allowedIPs = [ "192.168.155.5/32" ];
             }
