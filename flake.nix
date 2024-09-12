@@ -83,6 +83,7 @@
               specialArgs = { prev = base; };
             };
           beep = mkSystem "beep" "x86-64-linux" [ ];
+          cobble = mkSystem "cobble" "x86-64-linux" [ ];
         };
     };
 }

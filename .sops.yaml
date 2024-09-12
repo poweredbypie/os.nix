@@ -16,6 +16,10 @@ creation_rules:
     key_groups:
     - age:
         - *beep
+  - path_regex: ^sys/cobble/*
+    key_groups:
+    - age:
+        - *cobble
   - path_regex: ^modules/secrets/*
     key_groups:
     - age:

@@ -46,6 +46,7 @@ in
         (sshPubKey "xi" "pie")
         (sshPubKey "beep" "pie")
         (sshPubKey "verthe" "pie")
+        (sshPubKey "cobble" "pie")
       ];
     };
   };
