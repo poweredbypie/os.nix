@@ -2,6 +2,7 @@ keys:
   - &gear age1x7jy46z9yq5lrgpsmkmppp2x3m4pjutfgfxk552yq38st8u0lg4qemajc8
   - &zen age1ll97gtxezzc7fhq8g4qg3ny0xfxfd96rs3605d3ncrjvquhg4e6sscs27u
   - &beep age1v7e7fymuq90lrv09yvhuefc92jsqwu5h5v7pvm4jajcz5kq78gfsjvx4sl
+  - &cobble age1kzrdp5eyg0lyxy6fn926s3urcmv9n528856twvxf8wk7504vhftsfhz7dz
 creation_rules:
   - path_regex: ^sys/gear/*
     key_groups:
@@ -27,3 +28,4 @@ creation_rules:
       - *gear
       - *zen
       - *beep
+      - *cobble
