@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   programs.ssh =
@@ -7,7 +7,7 @@
     in
     {
       enable = true;
-      includes = [ config.sops.secrets.ssh-irl.path ];
+      includes = lib.optional config.pie.secrets.hasIRLKey config.sops.secrets.ssh-irl.path;
       matchBlocks = {
         beep = {
           hostname = "192.168.155.1";

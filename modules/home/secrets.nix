@@ -16,6 +16,7 @@ in
   options.pie.secrets = {
     # Most hosts should have SSH keys so this is fine
     hasSSH = lib.mkEnableOption "Whether the host has an SSH key." // { default = true; };
+    hasIRLKey = lib.mkEnableOption "Whether the host has a secondary SSH key.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -29,11 +30,13 @@ in
           "ssh/pie" = {
             path = "${home}/.ssh/pie";
           };
-          "ssh/irl" = {
-            path = "${home}/.ssh/irl";
-          };
           "ssh/${host}/pie" = {
             path = "${home}/.ssh/pie.pub";
+          };
+        })
+        (lib.mkIf cfg.hasIRLKey {
+          "ssh/irl" = {
+            path = "${home}/.ssh/irl";
           };
           "ssh/${host}/irl" = {
             path = "${home}/.ssh/irl.pub";

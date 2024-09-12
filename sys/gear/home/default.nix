@@ -16,5 +16,8 @@
     games.enable = true;
   };
 
-  pie.secrets.enable = true;
+  pie.secrets = {
+    enable = true;
+    hasIRLKey = true;
+  };
 }
