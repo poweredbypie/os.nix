@@ -19,4 +19,18 @@
         (key "beep")
       ];
   };
+  networking.wireguard = {
+    enable = true;
+    interfaces.wg0 = {
+      ips = [ "192.168.155.6/24" ];
+      privateKeyFile = config.sops.secrets."wireguard/key".path;
+
+      peers = [{
+        name = "beep";
+        publicKey = "mk2HVSQDKGi6Mj8AaQQ6wgX0Q+DuMQWNYm0vPUdnlUs=";
+        allowedIPs = [ "192.168.155.0/24" ];
+        endpoint = "!!beep-ip!!";
+      }];
+    };
+  };
 }

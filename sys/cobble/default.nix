@@ -12,6 +12,9 @@
       enable = true;
       net.enableWifi = false;
     };
-    secrets.enable = true;
+    secrets = {
+      enable = true;
+      hasWireguard = true;
+    };
   };
 }

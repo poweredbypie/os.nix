@@ -81,6 +81,11 @@
               publicKey = "xtc25CJPGU4edeq7Q5Gnac1kX7XZ929eWsseE+5ba2o=";
               allowedIPs = [ "192.168.155.5/32" ];
             }
+            {
+              name = "cobble";
+              publicKey = "e4MBjss8QU6LPew8970JWeurT4i+nAwNeN9V5PVutBI=";
+              allowedIPs = [ "192.168.155.6/32" ];
+            }
           ];
         };
       };
