@@ -13,5 +13,6 @@ in
     programs.virt-manager.enable = true;
     # Needed for virtio support.
     environment.systemPackages = [ pkgs.virtiofsd ];
+    users.users.pie.extraGroups = [ "libvirtd" ];
   };
 }
