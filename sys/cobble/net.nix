@@ -30,6 +30,7 @@
         publicKey = "mk2HVSQDKGi6Mj8AaQQ6wgX0Q+DuMQWNYm0vPUdnlUs=";
         allowedIPs = [ "192.168.155.0/24" ];
         endpoint = "!!beep-ip!!";
+        persistentKeepalive = 20;
       }];
     };
   };
