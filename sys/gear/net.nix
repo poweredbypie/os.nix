@@ -7,14 +7,12 @@
     interfaces.wg0 = {
       ips = [ "192.168.155.4/24" ];
       privateKeyFile = config.sops.secrets."wireguard/key".path;
-      # Setup and tear down DNS config
+      # Setup DNS config
       postSetup = ''
         ${pkgs.systemd}/bin/resolvectl dns wg0 192.168.155.1
         ${pkgs.systemd}/bin/resolvectl domain wg0 wirenet
       '';
-      postShutdown = ''
-        ${pkgs.systemd}/bin/resolvectl revert wg0
-      '';
+      # Teardown not required - wg0 interface gets destroyed beforehand
 
       peers = [{
         name = "beep";
