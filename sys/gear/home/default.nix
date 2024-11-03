@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./bluetooth.nix
+    ./ghidra.nix
     ./minecraft.nix
     ./obs.nix
     ./power.nix
