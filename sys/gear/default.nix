@@ -20,4 +20,10 @@
       hasWireguard = true;
     };
   };
+
+  # iPhone
+  services.usbmuxd.enable = true;
+  services.fwupd.enable = true;
+  # For serial connections
+  users.users.pie.extraGroups = [ "dialout" ];
 }
