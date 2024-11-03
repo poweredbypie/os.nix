@@ -9,18 +9,7 @@
       enable = true;
       includes = lib.optional config.pie.secrets.hasIRLKey config.sops.secrets.ssh-irl.path;
       matchBlocks = {
-        beep = {
-          hostname = "192.168.155.1";
-          identityFile = pie;
-        };
-        pi = {
-          hostname = "192.168.155.5";
-          identityFile = pie;
-        };
-        "github.com" = {
-          identityFile = pie;
-        };
-        "git.sr.ht" = {
+        "*" = {
           identityFile = pie;
         };
       };
