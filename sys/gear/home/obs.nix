@@ -3,8 +3,9 @@
 {
   programs.obs-studio = {
     enable = true;
-    plugins = [
-      pkgs.obs-studio-plugins.obs-vaapi
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-vaapi
+      wlrobs
     ];
   };
 }
