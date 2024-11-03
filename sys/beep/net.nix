@@ -23,12 +23,16 @@
       # 7777
       # Minecraft server
       25565
+      # DNS
+      53
     ];
     firewall.allowedUDPPorts = [
       # Minecraft voice chat UDP port
       24454
       # WireGuard
       51820
+      # DNS
+      53
     ];
     wireguard = {
       enable = true;
@@ -90,6 +94,22 @@
         };
       };
     };
+  };
+  services.coredns = {
+    enable = true;
+    config = ''
+      . {
+        bind wg0
+        hosts {
+          192.168.155.1 beep.wirenet
+          192.168.155.2 verthe.wirenet
+          192.168.155.3 xi.wirenet
+          192.168.155.4 gear.wirenet
+          192.168.155.5 pi.wirenet
+          192.168.155.6 cobble.wirenet
+        }
+      }
+    '';
   };
   # services.terraria = {
   #   enable = true;
