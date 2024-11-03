@@ -47,6 +47,12 @@ in
         (sshPubKey "beep" "pie")
         (sshPubKey "verthe" "pie")
         (sshPubKey "cobble" "pie")
+        {
+          cyber-vpn = {
+            format = "binary";
+            sopsFile = ./cyber-vpn;
+          };
+        }
       ];
     };
   };
