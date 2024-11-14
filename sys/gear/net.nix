@@ -24,6 +24,7 @@
   };
   services.openvpn = {
     servers.cyber.config = "config ${config.sops.secrets.cyber-vpn.path}";
+    servers.htb.config = "config ${config.sops.secrets.htb-vpn.path}";
   };
   programs.wireshark = {
     enable = true;

@@ -52,6 +52,10 @@ in
             format = "binary";
             sopsFile = ./cyber-vpn;
           };
+          htb-vpn = {
+            format = "binary";
+            sopsFile = ./htb-vpn;
+          };
         }
       ];
     };
