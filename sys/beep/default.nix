@@ -3,6 +3,7 @@
 {
   imports = [
     ./boot.nix
+    ./kube.nix
     ./net.nix
     ./swap.nix
     ./hardware-configuration.nix
