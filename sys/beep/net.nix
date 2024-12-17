@@ -25,6 +25,9 @@
       25565
       # DNS
       53
+      # Kubernetes stuff
+      6443
+      8888
     ];
     firewall.allowedUDPPorts = [
       # Minecraft voice chat UDP port
