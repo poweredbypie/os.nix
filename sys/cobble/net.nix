@@ -26,10 +26,10 @@
       privateKeyFile = config.sops.secrets."wireguard/key".path;
 
       peers = [{
-        name = "beep";
-        publicKey = "mk2HVSQDKGi6Mj8AaQQ6wgX0Q+DuMQWNYm0vPUdnlUs=";
+        name = "beagle";
+        publicKey = "d9Il+LRJDQfrId2kMtmOZT56xq8L4f8Gy/rB6puQygI=";
         allowedIPs = [ "192.168.155.0/24" ];
-        endpoint = "!!beep-ip!!";
+        endpoint = "!!beagle-ip!!";
         persistentKeepalive = 20;
       }];
     };

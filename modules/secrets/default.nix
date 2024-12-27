@@ -28,8 +28,8 @@ in
         })
         # Shared secrets
         {
-          # beep's Wireguard endpoint
-          "wireguard/ips/beep" = { inherit sopsFile; };
+          # beagle's Wireguard endpoint
+          "wireguard/ips/beagle" = { inherit sopsFile; };
           git-irl = {
             format = "binary";
             sopsFile = ./git-irl;
