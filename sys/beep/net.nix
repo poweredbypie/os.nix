@@ -65,9 +65,9 @@
           192.168.155.2 verthe.wirenet
           192.168.155.3 xi.wirenet
           192.168.155.4 gear.wirenet
-          192.168.155.5 pi.wirenet
+          192.168.155.5 beep.wirenet
           192.168.155.6 cobble.wirenet
-          192.168.155.7 beep.wirenet
+          192.168.156.1 pi.wirenet
         }
       }
     '';
