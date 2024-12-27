@@ -1,22 +1,9 @@
 { pkgs, ... }:
-let
-  masterIP = "192.168.155.1";
-  masterHost = "beep.kube";
-  apiPort = 6443;
-in
 {
-  environment.systemPackages = [ pkgs.kubectl ];
+  environment.systemPackages = [ pkgs.k3s ];
 
-  networking.extraHosts = "${masterIP} ${masterHost}";
-  services.kubernetes = {
-    roles = [ "master" "node" ];
-    masterAddress = masterHost;
-    easyCerts = true;
-    apiserver = {
-      securePort = apiPort;
-      advertiseAddress = masterIP;
-    };
-    kubelet.extraOpts = "--fail-swap-on=false";
-    pki.cfsslAPIExtraSANs = [ "localhost" "192.168.155.1" ];
+  services.k3s = {
+    enable = true;
+    role = "server";
   };
 }
