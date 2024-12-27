@@ -27,7 +27,7 @@
 
       peers = [{
         name = "beagle";
-        publicKey = "d9Il+LRJDQfrId2kMtmOZT56xq8L4f8Gy/rB6puQygI=";
+        publicKey = "vJ41r2IY7tgtGLz6YaZ5rC2kl8WgRWmJZFvt+Um1xzk=";
         allowedIPs = [ "192.168.155.0/24" ];
         endpoint = "!!beagle-ip!!";
         persistentKeepalive = 20;
