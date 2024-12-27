@@ -17,7 +17,7 @@
       peers = [{
         name = "beagle";
         publicKey = "d9Il+LRJDQfrId2kMtmOZT56xq8L4f8Gy/rB6puQygI=";
-        allowedIPs = [ "192.168.155.0/24" ];
+        allowedIPs = [ "192.168.155.0/24" "192.168.156.0/24" ];
         endpoint = "!!beagle-ip!!";
       }];
     };
