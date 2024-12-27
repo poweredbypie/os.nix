@@ -40,60 +40,17 @@
     wireguard = {
       enable = true;
       interfaces = {
-        # Architecture:
-        # - Free peers (iPhone, laptop)
-        # - Local static peers (Windows desktop)
-        # This is a "router" for the local static peers, which make up a "site".
-        # When this "router" receives packets on the WireGuard subnet it doesn't recognize,
-        # it applies NAT to the packet and sends it out to the local static peer (which it knows the IP of, since I have set it here)
         wg0 = {
-          ips = [ "192.168.155.1/24" ];
+          ips = [ "192.168.155.5/24" ];
           listenPort = 51820;
           privateKeyFile = config.sops.secrets."wireguard/key".path;
 
-          postSetup = ''
-            ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 192.168.155.0/24 -o wg0 -j MASQUERADE
-            ${pkgs.procps}/bin/sysctl net.ipv4.ip_forward=1
-          '';
-
-          postShutdown = ''
-            ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 192.168.155.0/24 -o wg0 -j MASQUERADE
-            ${pkgs.procps}/bin/sysctl net.ipv4.ip_forward=0
-          '';
-
-          peers = [
-            # Desktop
-            {
-              name = "verthe";
-              publicKey = "8VMAmorVZx2mcakVlAcu8+6rdT9w+Krx+zmU/McTLF8=";
-              allowedIPs = [ "192.168.155.2/32" ];
-              # This is a fixed endpoint.
-              endpoint = "192.168.1.156:51820";
-            }
-            # iPhone
-            {
-              name = "xi";
-              publicKey = "vuLZN4uYP+khgI4QYGaunDJ21A3ix6EM8USzPkEcY2c=";
-              allowedIPs = [ "192.168.155.3/32" ];
-            }
-            # Laptop
-            {
-              name = "gear";
-              publicKey = "SjyDPxHd8/FHl2jIDK1g7vPcOpT3Q+HXL9CaglkUXH8=";
-              allowedIPs = [ "192.168.155.4/32" ];
-            }
-            # pi (Raspberry Pi 2B)
-            {
-              name = "pi";
-              publicKey = "xtc25CJPGU4edeq7Q5Gnac1kX7XZ929eWsseE+5ba2o=";
-              allowedIPs = [ "192.168.155.5/32" ];
-            }
-            {
-              name = "cobble";
-              publicKey = "e4MBjss8QU6LPew8970JWeurT4i+nAwNeN9V5PVutBI=";
-              allowedIPs = [ "192.168.155.6/32" ];
-            }
-          ];
+          peers = [{
+            name = "beagle";
+            publicKey = "d9Il+LRJDQfrId2kMtmOZT56xq8L4f8Gy/rB6puQygI=";
+            allowedIPs = [ "192.168.155.0/24" "192.168.156.0/24" ];
+            endpoint = "192.168.1.157:51820";
+          }];
         };
       };
     };
@@ -104,12 +61,13 @@
       . {
         bind wg0
         hosts {
-          192.168.155.1 beep.wirenet
+          192.168.155.1 beagle.wirenet
           192.168.155.2 verthe.wirenet
           192.168.155.3 xi.wirenet
           192.168.155.4 gear.wirenet
           192.168.155.5 pi.wirenet
           192.168.155.6 cobble.wirenet
+          192.168.155.7 beep.wirenet
         }
       }
     '';
