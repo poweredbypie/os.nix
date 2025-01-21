@@ -3,12 +3,27 @@
 { pkgs, ... }:
 
 {
-  programs.kakoune = {
+  programs.kakoune =
+  let
+    scm = [ ".git" ".hg" ];
+    mkLang = { regex, lsp, args, roots }: {
+      name = "BufSetOption";
+      option = "filetype=${regex}";
+      commands = ''
+        set-option buffer lsp_servers %{
+          ["${lsp}"]
+          args = ${builtins.toJSON args}
+          root_globs = ${builtins.toJSON roots}
+        }
+      '';
+    };
+  in
+  {
     config.hooks = [
       # Enables kak-lsp.
       {
         name = "WinSetOption";
-        option = "filetype=(javascript|typescript|html|css|json|c|cpp|nix|rust|go|sv|zig|latex|haskell)";
+        option = "filetype=(javascript|typescript|html|css|json|nix|rust|go|sv|zig|latex|haskell|c|cpp)";
         commands = ''
           lsp-enable-window
           # Enables nicer diagnostics
@@ -35,6 +50,48 @@
           hook window BufWritePre .* lsp-formatting-sync
         '';
       }
+      (mkLang {
+        regex = "(?:c|cpp)";
+        lsp = "${pkgs.clang-tools_15}/bin/clangd";
+        args = [ "--log=error" ];
+        roots = [ "compile_commands.json" ".clangd" ] ++ scm;
+      })
+      (mkLang {
+        regex = "go";
+        lsp = "${pkgs.gopls}/bin/gopls";
+        args = [];
+        roots = [ "go.mod" ] ++ scm;
+      })
+      (mkLang {
+        regex = "hs";
+        lsp = "${pkgs.haskell-language-server}/bin/haskell-language-server-wrapper";
+        args = [ "--lsp" ];
+        roots = [ "Setup.hs" "stack.yaml" "*.cabal" ];
+      })
+      (mkLang {
+        regex = "tex";
+        lsp = "${pkgs.texlab}/bin/texlab";
+        args = [];
+        roots = scm;
+      })
+      (mkLang {
+        regex = "nix";
+        lsp = "${pkgs.nil}/bin/nil";
+        args = [];
+        roots = [ "flake.nix" "shell.nix" ] ++ scm;
+      })
+      (mkLang {
+        regex = "rust";
+        lsp = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+        args = [];
+        roots = [ "Cargo.toml" ];
+      })
+      (mkLang {
+        regex = "zig";
+        lsp = "${pkgs.zls}/bin/zls";
+        args = [];
+        roots = [ "build.zig" ];
+      })
       # Use tab for autocomplete
       {
         name = "InsertCompletionShow";
@@ -55,7 +112,7 @@
     ];
     # Load kak-lsp on startup.
     extraConfig = ''
-        eval %sh{${pkgs.kakoune-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+      eval %sh{${pkgs.kakoune-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       lsp-auto-hover-enable
     '';
   };

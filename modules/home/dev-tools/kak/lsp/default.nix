@@ -10,6 +10,5 @@ in
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     (import ./hooks.nix { inherit pkgs; })
-    (import ./langs.nix { inherit pkgs lib; })
   ]);
 }
