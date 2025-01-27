@@ -26,6 +26,7 @@
     servers.cyber.config = "config ${config.sops.secrets.cyber-vpn.path}";
     servers.htb.config = "config ${config.sops.secrets.htb-vpn.path}";
   };
+  services.netbird.enable = true;
   programs.wireshark = {
     enable = true;
     package = pkgs.wireshark-qt;
