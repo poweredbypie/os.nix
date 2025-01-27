@@ -38,17 +38,24 @@ in
         # LaTeX
         tectonic
 
+        # Typst
+        typst
+
         # C/C++
         clang_15
         clang-tools_15
         lldb_15
         gnumake
 
+        # C#
+        dotnet-sdk
+
         # Rust
         # Hello verbosity
         (pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
           # rust-analyzer needs this
           extensions = [ "rust-src" ];
+          targets = [ "x86_64-unknown-linux-musl" ];
         }))
 
         # TLA+

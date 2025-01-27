@@ -92,6 +92,18 @@
         args = [];
         roots = [ "build.zig" ];
       })
+      (mkLang {
+        regex = "typ";
+        lsp = "${pkgs.tinymist}/bin/tinymist";
+        args = [];
+        roots = scm;
+      })
+      (mkLang {
+        regex = "cs";
+        lsp = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
+        args = ["-lsp"];
+        roots = scm;
+      })
       # Use tab for autocomplete
       {
         name = "InsertCompletionShow";
