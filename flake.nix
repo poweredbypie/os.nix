@@ -52,7 +52,7 @@
                 backupFileExtension = "hm-backup";
               };
               nixpkgs.overlays = [
-                nur.overlay
+                nur.overlays.default
                 rust-overlay.overlays.default
                 (import ./pkgs)
               ];
@@ -61,6 +61,13 @@
         };
     in
     {
+      packages.x86_64-linux.default = (import nixpkgs
+        {
+          system = "x86_64-linux";
+          overlays = [
+            (import ./pkgs)
+          ];
+        }).kakoune-lsp;
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       nixosConfigurations =
         {

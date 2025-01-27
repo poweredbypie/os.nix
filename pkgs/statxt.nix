@@ -1,27 +1,19 @@
-{ stdenv, fetchFromGitHub, zig_0_10 }:
+{ stdenv, fetchFromGitHub, zig }:
 
 stdenv.mkDerivation rec {
   pname = "statxt";
-  version = "0.1.0";
+  version = "0.1.1";
 
   src = fetchFromGitHub {
     owner = "poweredbypie";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-Ymi2xZxLcyIZObuZpr55C0NRxo27UGxN1j5NLiWwRs0=";
+    sha256 = "sha256-Sb4UQf3DjMozRAVgMUsCarntgU3JCQ7REGw6LJXANgs=";
   };
 
-  nativeBuildInputs = [ zig_0_10 ];
+  nativeBuildInputs = [ zig.hook ];
+
+  zigBuildFlags = [ "-Doptimize=ReleaseSmall" ];
 
   dontConfigure = true;
-
-  preBuild = ''
-    export HOME=$TMPDIR
-  '';
-
-  installPhase = ''
-    runHook preInstall
-    zig build -Drelease-small -Dcpu=baseline --prefix $out install
-    runHook postInstall
-  '';
 }

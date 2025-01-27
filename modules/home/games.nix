@@ -11,9 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       osu-lazer-bin
-      (retroarch.override {
-        cores = [ libretro.vba-next ];
-      })
+      (retroarch.withCores (cores: [ libretro.vba-next ]))
     ];
   };
 }
